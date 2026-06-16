@@ -1055,8 +1055,8 @@ export default function Profess() {
     .replace(/#{1,6}\s+/g, '')
     .replace(/`{1,3}[^`]*`{1,3}/g, '')
     // Strip punctuation that TTS reads literally
-    .replace(//g, ', ')
-    .replace(//g, ', ')
+    .replace(/[,;:]/g, ', ')
+    .replace(/[()]/g, ' ')
     .replace(/ - /g, ', ')
     .replace(/\.\.\./g, '. ')
     .replace(/[""]/g, '"')
@@ -2637,4 +2637,5 @@ function MusicWidget({ activePlaylist, setActivePlaylist, onClose }) {
     </div>
   );
 }
+
 
