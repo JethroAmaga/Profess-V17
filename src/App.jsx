@@ -2032,7 +2032,7 @@ export default function Profess() {
             <div style={{ borderBottom:"1px solid #141414", padding:"48px 40px" }}>
               <div style={{ maxWidth:"680px", margin:"0 auto", display:"flex", flexDirection:"column", gap:"24px" }}>
                 <p style={{ fontSize:"15px", lineHeight:1.9, color:"#D8D5CE" }}>
-                  Profess is built on a single principle: you cannot prepare for a conversation without experiencing the other person's perspective. Most practice tools give you a passive audience. Profess gives you an active one — a character that pushes back, reacts, and responds the way your real audience will. The coaching comes after the exchange, not during it.
+                  Profess is a communication coach built around perspective. Practice difficult conversations with audiences that challenge your assumptions, question your reasoning, and reveal blind spots in your communication. The goal isn't to predict people. It's to help you see what you might have missed before the real conversation begins.
                 </p>
                 <p style={{ fontSize:"15px", lineHeight:1.9, color:"#7A7570" }}>
                   Profess was built by Jethro Amaga as a communication training tool for anyone who wants to grow — not just perform.
