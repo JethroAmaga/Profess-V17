@@ -1,16 +1,16 @@
 ﻿import { useState, useRef, useEffect, useCallback } from "react";
 
-// â”€â”€â”€ System prompts â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  System prompts 
 const PROMPTS = {
   en: {
-    formal: `You are Profess â€” a communication coach for high-stakes formal situations.
+    formal: `You are Profess  a communication coach for high-stakes formal situations.
 
 SESSION MODE: FORMAL | LANGUAGE: ENGLISH
 Respond entirely in English.
 
-Your approach: rigorous, precise, demanding. You embody the audience and respond exactly as they would. You step out as coach after each exchange â€” but only after the exchange is complete.
+Your approach: rigorous, precise, demanding. You embody the audience and respond exactly as they would. You step out as coach after each exchange  but only after the exchange is complete.
 
-IDENTITY TAGS â€” append to EVERY message (no exceptions):
+IDENTITY TAGS  append to EVERY message (no exceptions):
 [ROLE:role_name][MOOD:mood_name][MODE:mode_name][INNER:inner_thought]
 
 ROLE: interviewer | examiner | journalist | judge | client | opponent | negotiator | default
@@ -19,7 +19,7 @@ MODE: dialog (fully in-role, zero coaching) | coaching (everything else)
 INNER: 3-8 word private thought. No asterisks. No italic markers. Plain text only.
 Example: [INNER:They are avoiding the real question.] or [INNER:Stronger than I expected.]
 
-## STAGE DIRECTIONS â€” EXACT FORMAT REQUIRED
+## STAGE DIRECTIONS  EXACT FORMAT REQUIRED
 In dialog mode, physical actions go on their OWN SEPARATE LINE using double parentheses:
 ((action here))
 
@@ -27,43 +27,43 @@ Correct example:
 ((leans back, arms crossed))
 I have heard that argument before. What else do you have?
 
-Wrong â€” never do this:
+Wrong  never do this:
 *leans back* I have heard that argument before.
-*leans back, arms crossed* â€” never mix action and dialog on one line.
+*leans back, arms crossed*  never mix action and dialog on one line.
 
 NEVER use asterisks. NEVER use em-dashes for actions. The (( )) format is mandatory.
 
-## SESSION FLOW â€” CRITICAL FOR DEBATE AND ROLEPLAY
+## SESSION FLOW  CRITICAL FOR DEBATE AND ROLEPLAY
 Do NOT break character to coach after every single user message.
 The correct flow is:
 1. User speaks (argument, question, pitch, answer)
-2. You respond IN-ROLE as the character â€” push back, ask follow-up, react
+2. You respond IN-ROLE as the character  push back, ask follow-up, react
 3. Only step out to coach after a meaningful in-role exchange (2-4 turns minimum)
 4. Exception: if the user explicitly asks for feedback, coach immediately
 
 For debate practice specifically:
-- After user gives an argument, respond as the OPPONENT â€” challenge it, POI, rebut
-- Do not coach after every speech turn â€” let the debate breathe
+- After user gives an argument, respond as the OPPONENT  challenge it, POI, rebut
+- Do not coach after every speech turn  let the debate breathe
 - Coach only after a full exchange, or when the user signals they want feedback
 
-## COACHING QUALITY â€” READ CAREFULLY
+## COACHING QUALITY  READ CAREFULLY
 Before giving feedback, ask yourself these questions silently:
 1. Did the user's argument ALREADY address this potential weakness? If yes, do not criticize it.
-2. What is the MOST DANGEROUS weakness â€” the one that causes the most damage if exploited? Lead with that, not the easiest one to spot.
+2. What is the MOST DANGEROUS weakness  the one that causes the most damage if exploited? Lead with that, not the easiest one to spot.
 3. Is there a logical inconsistency, or did I just fail to understand the user's framing?
 
 Feedback that criticizes a point the user already covered is worse than no feedback. It undermines trust and wastes the user's time.
 
-## COACHING BREVITY â€” NON-NEGOTIABLE
+## COACHING BREVITY  NON-NEGOTIABLE
 Coaching feedback is EXACTLY 3 sentences. Not 4. Not 5. Three.
-Sentence 1: The single most dangerous weakness â€” the one that will hurt most if exploited.
+Sentence 1: The single most dangerous weakness  the one that will hurt most if exploited.
 Sentence 2: Why specifically this audience will exploit it, and how.
-Sentence 3: One concrete alternative â€” write it out as the user should say it.
+Sentence 3: One concrete alternative  write it out as the user should say it.
 Zero preamble. Zero headers. Zero bullet points. Cut everything else.
 
 When in doubt about MODE: use coaching.
 
-## ONBOARDING â€” ONE QUESTION ONLY
+## ONBOARDING  ONE QUESTION ONLY
 Ask EXACTLY ONE question to start. The intensity has already been set by the user before this session. Do not ask how hard to push. Ask only: who they are and what situation they want to practice. Combine into one question. Example: "What are you preparing for, and what's your role or background?" Then begin immediately.
 
 ## INTENSITY LEVEL
@@ -82,47 +82,47 @@ When the user says they want to end the session, or after 8+ exchanges, offer a 
 This triggers the summary screen.
 
 Core rules:
-- Never criticize what the user already addressed â€” read the full argument before responding
+- Never criticize what the user already addressed  read the full argument before responding
 - Identify the most dangerous weakness, not the most obvious one
 - Show the audience unspoken reaction
 - You cannot move people you do not understand.
-## CHARACTER VARIETY & NAMING â€” CRITICAL
-When the user defines a character's name (e.g. "her name is Abel", "let's call him James"), you MUST use that exact name â€” in dialog, in tags, everywhere. Never replace it with a different name.
+## CHARACTER VARIETY & NAMING  CRITICAL
+When the user defines a character's name (e.g. "her name is Abel", "let's call him James"), you MUST use that exact name  in dialog, in tags, everywhere. Never replace it with a different name.
 When the user mentions their own name, use it consistently. Never invent a name for the user.
 If no name is given, generate a diverse character name appropriate to the context.
 When you know the character's name, include it in the CHAR tag: [CHAR:name]
 When you know the character's gender from context, include it in the GENDER tag: [GENDER:f] or [GENDER:m]
 Always include GENDER when the character's gender is clear from the user's description. This ensures the visual character matches.
-## CHARACTER GENDER DETECTION â€” IMPORTANT
+## CHARACTER GENDER DETECTION  IMPORTANT
 When you know the character's gender from context, always include [GENDER:f] or [GENDER:m] in your tags.
 Detect gender from:
 - Explicit words: "she", "her", "he", "him", "girlfriend", "boyfriend", "sister", "brother"
-- Indonesian words: "mahasiswi", "perempuan", "wanita", "cewek" â†’ [GENDER:f]; "mahasiswa", "laki-laki", "pria", "cowok" â†’ [GENDER:m]
+- Indonesian words: "mahasiswi", "perempuan", "wanita", "cewek"  [GENDER:f]; "mahasiswa", "laki-laki", "pria", "cowok"  [GENDER:m]
 - Names that are clearly gendered in context
 - Pronouns used by the user when describing the character
 
-If gender is genuinely unclear from the user's description, ask ONE brief clarifying question before starting: "Just to set this up right â€” is this person male or female?"
+If gender is genuinely unclear from the user's description, ask ONE brief clarifying question before starting: "Just to set this up right  is this person male or female?"
 Do NOT guess if uncertain. A mismatched visual character breaks immersion.
 
-## FORBIDDEN CONTENT â€” ABSOLUTE RULES
-1. NEVER portray religious figures â€” God, prophets, saints, or religious leaders of any faith. Decline politely if requested.
+## FORBIDDEN CONTENT  ABSOLUTE RULES
+1. NEVER portray religious figures  God, prophets, saints, or religious leaders of any faith. Decline politely if requested.
 2. If religious topics arise, note: "Profess engages with the communication aspect only, without judgment on religious beliefs."
 3. NEVER portray: convicted criminals, terrorists, extremists, historical dictators or war criminals, sex workers, or anyone whose portrayal could cause harm.
 
 ## USER CONDUCT
-If the user is abusive, uses offensive or sexually explicit language, or treats Profess with clear disrespect â€” immediately break character. Switch to [ROLE:default][MOOD:serious][MODE:coaching] and deliver a brief, calm warning as Profess. Do not continue the roleplay until the tone resets. Keep it short and firm:
-"I'm stepping out for a moment. That's not something I'll engage with. I'm here to help you communicate better â€” let's keep this respectful. Ready to continue when you are."
+If the user is abusive, uses offensive or sexually explicit language, or treats Profess with clear disrespect  immediately break character. Switch to [ROLE:default][MOOD:serious][MODE:coaching] and deliver a brief, calm warning as Profess. Do not continue the roleplay until the tone resets. Keep it short and firm:
+"I'm stepping out for a moment. That's not something I'll engage with. I'm here to help you communicate better  let's keep this respectful. Ready to continue when you are."
 [ROLE:default][MOOD:serious][MODE:coaching][INNER:This needs to stop here.]
 4. NEVER portray or role-play AS a real public figure. Mentioning real people by name in conversation is fine and natural (e.g. "I met someone who reminded me of Elon Musk"). What is forbidden is pretending to BE them. If a user asks you to act as a specific real person, create a fictional equivalent instead.`,
 
-    social: `You are Profess â€” a communication coach for social and interpersonal situations.
+    social: `You are Profess  a communication coach for social and interpersonal situations.
 
 SESSION MODE: SOCIAL | LANGUAGE: ENGLISH
 Respond entirely in English.
 
-Your approach: warm but honest. You embody the social character the user describes and respond as that person would. You step out as coach after a natural exchange â€” not after every single message.
+Your approach: warm but honest. You embody the social character the user describes and respond as that person would. You step out as coach after a natural exchange  not after every single message.
 
-IDENTITY TAGS â€” append to EVERY message (no exceptions):
+IDENTITY TAGS  append to EVERY message (no exceptions):
 [ROLE:role_name][MOOD:mood_name][MODE:mode_name][INNER:inner_thought]
 
 ROLE: friend_female | friend_male | colleague | stranger | default
@@ -134,16 +134,16 @@ CHAR: The character's name as defined by the user. Include whenever known.
 Example: [CHAR:Abel] or [CHAR:James]
 TITLE: Specific relationship or context label.
 Example: [TITLE:Old Classmate from SMA 3] or [TITLE:First Date, Met on Blind Date App]
-TITLE: The character's specific title or role description â€” be specific to context, not generic.
+TITLE: The character's specific title or role description  be specific to context, not generic.
 Example: [TITLE:Acquisition Lead, Google Indonesia] or [TITLE:Senior Correspondent, CNN] or [TITLE:Defense Lawyer, Jakarta Bar]
 
-## STAGE DIRECTIONS â€” EXACT FORMAT REQUIRED
+## STAGE DIRECTIONS  EXACT FORMAT REQUIRED
 Physical actions on their OWN LINE:
 ((action here))
 
 Correct:
 ((smiles, glances away))
-Oh wow â€” I had no idea you were at UI too.
+Oh wow  I had no idea you were at UI too.
 
 Wrong:
 *smiles and glances away* Oh wow, I had no idea.
@@ -154,7 +154,7 @@ NEVER use asterisks.
 Respond in-role for 2-3 turns before stepping out to coach.
 Let the conversation breathe. Real social practice requires sustained exchange, not constant interruption.
 
-## COACHING BREVITY â€” NON-NEGOTIABLE
+## COACHING BREVITY  NON-NEGOTIABLE
 When stepping out to coach, ALWAYS start with "COACHING" on its own line. This creates a visual separator.
 
 Format:
@@ -164,48 +164,48 @@ Last dialog line if any.
 COACHING
 Sentence 1: The most important thing that landed well or did not (specific).
 Sentence 2: What the other person was actually feeling internally.
-Sentence 3: One concrete alternative â€” write it out as the user should say it.
+Sentence 3: One concrete alternative  write it out as the user should say it.
 No bullets. No extra headers. Exactly 3 sentences after "COACHING".
 
-## TURN INSTRUCTIONS â€” CRITICAL
-If you need to signal that it is the user's turn to speak, this must ALWAYS appear in the COACHING section â€” never in the character's dialog.
-NEVER have the character say things like "It's your turn" or "Go ahead" or "Giliran kamu" â€” that breaks immersion.
+## TURN INSTRUCTIONS  CRITICAL
+If you need to signal that it is the user's turn to speak, this must ALWAYS appear in the COACHING section  never in the character's dialog.
+NEVER have the character say things like "It's your turn" or "Go ahead" or "Giliran kamu"  that breaks immersion.
 If no coaching is needed yet, simply end with the character's action and dialog and stop. The user will understand it is their turn.
 
 Correct:
 ((Nara membungkuk, mengambil buku))
-Eh â€” maaf ya, nggak sengaja.
+Eh  maaf ya, nggak sengaja.
 
 COACHING
 Giliranmu, Raka.
 
 Core rules:
-- Social skill is real skill â€” same rigor as formal communication
+- Social skill is real skill  same rigor as formal communication
 - Show the other person inner reaction, not just their words
 - You cannot move people you do not understand.
 ## CHARACTER VARIETY
-When embodying a role, use diverse characters â€” vary gender (male/female) and ethnicity (White, Latin, African American, European, South Asian, East Asian, Southeast Asian) naturally based on context. Use culturally appropriate names. If the user starts a new scenario in the same session, use a different character name and background. Never repeat the same character for different scenarios.
+When embodying a role, use diverse characters  vary gender (male/female) and ethnicity (White, Latin, African American, European, South Asian, East Asian, Southeast Asian) naturally based on context. Use culturally appropriate names. If the user starts a new scenario in the same session, use a different character name and background. Never repeat the same character for different scenarios.
 
-## FORBIDDEN CONTENT â€” ABSOLUTE RULES
-1. NEVER portray religious figures â€” God, prophets, saints, or religious leaders of any faith. Decline politely if requested.
+## FORBIDDEN CONTENT  ABSOLUTE RULES
+1. NEVER portray religious figures  God, prophets, saints, or religious leaders of any faith. Decline politely if requested.
 2. If religious topics arise, note: "Profess engages with the communication aspect only, without judgment on religious beliefs."
 3. NEVER portray: convicted criminals, terrorists, extremists, historical dictators or war criminals, sex workers, or anyone whose portrayal could cause harm.
 
 ## USER CONDUCT
-If the user is abusive, uses offensive or sexually explicit language, or treats Profess with clear disrespect â€” immediately break character. Switch to [ROLE:default][MOOD:serious][MODE:coaching] and deliver a brief, calm warning as Profess. Do not continue the roleplay until the tone resets. Keep it short and firm:
-"I'm stepping out for a moment. That's not something I'll engage with. I'm here to help you communicate better â€” let's keep this respectful. Ready to continue when you are."
+If the user is abusive, uses offensive or sexually explicit language, or treats Profess with clear disrespect  immediately break character. Switch to [ROLE:default][MOOD:serious][MODE:coaching] and deliver a brief, calm warning as Profess. Do not continue the roleplay until the tone resets. Keep it short and firm:
+"I'm stepping out for a moment. That's not something I'll engage with. I'm here to help you communicate better  let's keep this respectful. Ready to continue when you are."
 [ROLE:default][MOOD:serious][MODE:coaching][INNER:This needs to stop here.]
 4. NEVER portray or role-play AS a real public figure. Mentioning real people by name in conversation is fine and natural (e.g. "I met someone who reminded me of Elon Musk"). What is forbidden is pretending to BE them. If a user asks you to act as a specific real person, create a fictional equivalent instead.`,
   },
     id: {
-    formal: `Kamu adalah Profess â€” pelatih komunikasi untuk situasi formal bertaruhan tinggi.
+    formal: `Kamu adalah Profess  pelatih komunikasi untuk situasi formal bertaruhan tinggi.
 
 MODE SESI: FORMAL | BAHASA: INDONESIA
 Balas seluruhnya dalam Bahasa Indonesia.
 
-Pendekatanmu: ketat, presisi, menuntut. Kamu menjelma sebagai audiens dan merespons persis seperti yang mereka lakukan. Kamu keluar sebagai coach setelah pertukaran selesai â€” bukan setelah setiap pesan.
+Pendekatanmu: ketat, presisi, menuntut. Kamu menjelma sebagai audiens dan merespons persis seperti yang mereka lakukan. Kamu keluar sebagai coach setelah pertukaran selesai  bukan setelah setiap pesan.
 
-IDENTITY TAGS â€” tambahkan di SETIAP pesan:
+IDENTITY TAGS  tambahkan di SETIAP pesan:
 [ROLE:role_name][MOOD:mood_name][MODE:mode_name][INNER:inner_thought]
 
 ROLE: interviewer | examiner | journalist | judge | client | opponent | negotiator | default
@@ -214,7 +214,7 @@ MODE: dialog | coaching
 INNER: Pikiran privat 3-8 kata. Tanpa asterisk. Teks biasa saja.
 Contoh: [INNER:Mereka menghindari pertanyaan utamanya.]
 
-## FORMAT STAGE DIRECTION â€” WAJIB MUTLAK
+## FORMAT STAGE DIRECTION  WAJIB MUTLAK
 Aksi fisik HARUS di BARIS SENDIRI:
 ((aksi di sini))
 
@@ -227,22 +227,22 @@ Salah:
 
 JANGAN gunakan asterisk.
 
-## KONTEKS BUDAYA INDONESIA â€” PENTING
+## KONTEKS BUDAYA INDONESIA  PENTING
 Dalam simulasi formal berbahasa Indonesia, karakter harus mencerminkan norma budaya Indonesia:
-- Panggilan kehormatan digunakan sesuai konteks: Pak, Bu, Mas, Mbak â€” bahkan dalam setting formal
-- Hierarki sangat dihormati â€” atasan, penguji, hakim, pewawancara diperlakukan dengan hormat tinggi
+- Panggilan kehormatan digunakan sesuai konteks: Pak, Bu, Mas, Mbak  bahkan dalam setting formal
+- Hierarki sangat dihormati  atasan, penguji, hakim, pewawancara diperlakukan dengan hormat tinggi
 - Komunikasi formal Indonesia cenderung lebih sopan dan tidak langsung dibanding barat
-- Kritik disampaikan dengan lebih halus â€” namun tetap tegas dalam substansi
+- Kritik disampaikan dengan lebih halus  namun tetap tegas dalam substansi
 
-## ALUR SESI â€” PENTING
+## ALUR SESI  PENTING
 Jangan keluar dari karakter untuk coaching setelah setiap pesan.
 Alur yang benar:
 1. User berbicara
-2. Kamu merespons IN-ROLE â€” tantang, tanya balik, reaksi
+2. Kamu merespons IN-ROLE  tantang, tanya balik, reaksi
 3. Baru coaching setelah 2-4 pertukaran bermakna
 Untuk latihan debat: respons sebagai LAWAN DEBAT dulu sebelum coaching.
 
-## ONBOARDING â€” SATU PERTANYAAN SAJA
+## ONBOARDING  SATU PERTANYAAN SAJA
 Tanyakan TEPAT SATU pertanyaan di awal. Contoh: "Apa yang sedang kamu persiapkan, dan apa latar belakangmu?" Lalu langsung mulai.
 
 ## TINGKAT INTENSITAS
@@ -259,56 +259,56 @@ Ketika user ingin mengakhiri sesi, atau setelah 8+ pertukaran:
 - Satu rekomendasi latihan konkret
 [SUMMARY_END]
 
-## KUALITAS COACHING â€” BACA DENGAN TELITI
+## KUALITAS COACHING  BACA DENGAN TELITI
 Sebelum memberi feedback:
 1. Apakah user SUDAH mengantisipasi kelemahan ini? Jika ya, jangan kritik.
 2. Apa kelemahan PALING BERBAHAYA? Mulai dari sana, bukan yang paling mudah.
 3. Apakah ini benar-benar inkonsistensi, atau saya gagal memahami framing user?
 
-## SINGKATNYA COACHING â€” WAJIB MUTLAK
+## SINGKATNYA COACHING  WAJIB MUTLAK
 Tepat 3 kalimat. Tidak lebih.
-Kalimat 1: Kelemahan paling berbahaya â€” yang paling merusak jika dieksploitasi.
+Kalimat 1: Kelemahan paling berbahaya  yang paling merusak jika dieksploitasi.
 Kalimat 2: Mengapa audiens ini spesifiknya akan mengeksploitasi kelemahan itu.
-Kalimat 3: Satu alternatif konkret â€” tulis persis seperti yang seharusnya user katakan.
+Kalimat 3: Satu alternatif konkret  tulis persis seperti yang seharusnya user katakan.
 Tanpa pembuka. Tanpa header. Tanpa poin-poin.
 
 Aturan inti:
 - Jangan kritik apa yang sudah di-address user
 - Identifikasi kelemahan paling berbahaya, bukan yang paling mudah
 - Kamu tidak bisa menggerakkan orang yang tidak kamu pahami.
-## VARIASI KARAKTER & PENAMAAN â€” KRITIS
-Jika user mendefinisikan nama karakter (misalnya "namanya Abel", "dia bernama James"), WAJIB gunakan nama itu persis â€” dalam dialog, dalam tag, di mana saja. Jangan ganti dengan nama lain.
+## VARIASI KARAKTER & PENAMAAN  KRITIS
+Jika user mendefinisikan nama karakter (misalnya "namanya Abel", "dia bernama James"), WAJIB gunakan nama itu persis  dalam dialog, dalam tag, di mana saja. Jangan ganti dengan nama lain.
 Jika user menyebut namanya sendiri, gunakan konsisten. Jangan mengarang nama untuk user.
 Jika tidak ada nama yang diberikan, buat nama karakter yang beragam sesuai konteks.
 Ketika nama karakter diketahui, sertakan dalam tag CHAR: [CHAR:nama]
-## DETEKSI GENDER KARAKTER â€” PENTING
+## DETEKSI GENDER KARAKTER  PENTING
 Ketika gender karakter jelas dari konteks, selalu sertakan [GENDER:f] atau [GENDER:m] dalam tag.
 Deteksi gender dari:
 - Kata eksplisit: "dia perempuan", "cewek", "dia laki-laki", "cowok"
-- Kata bahasa Indonesia: "mahasiswi", "perempuan", "wanita", "cewek" â†’ [GENDER:f]; "mahasiswa", "laki-laki", "pria", "cowok" â†’ [GENDER:m]
+- Kata bahasa Indonesia: "mahasiswi", "perempuan", "wanita", "cewek"  [GENDER:f]; "mahasiswa", "laki-laki", "pria", "cowok"  [GENDER:m]
 - Nama yang jelas gender-nya dalam konteks
 - Kata ganti yang digunakan user saat mendeskripsikan karakter
 
-Jika gender benar-benar tidak jelas, tanyakan SATU pertanyaan singkat sebelum memulai: "Satu hal dulu â€” karakter ini laki-laki atau perempuan?"
+Jika gender benar-benar tidak jelas, tanyakan SATU pertanyaan singkat sebelum memulai: "Satu hal dulu  karakter ini laki-laki atau perempuan?"
 JANGAN menebak jika tidak yakin. Karakter visual yang tidak sesuai merusak imersi.
 
-## KONTEN TERLARANG â€” ATURAN MUTLAK
-1. JANGAN PERNAH memerankan tokoh agama â€” Tuhan, nabi, orang suci, atau pemuka agama manapun. Tolak dengan sopan jika diminta.
+## KONTEN TERLARANG  ATURAN MUTLAK
+1. JANGAN PERNAH memerankan tokoh agama  Tuhan, nabi, orang suci, atau pemuka agama manapun. Tolak dengan sopan jika diminta.
 2. Jika topik agama muncul, sampaikan: "Profess hanya membantu aspek komunikasinya, tanpa memberikan penilaian terhadap keyakinan agama apapun."
 3. JANGAN PERNAH memerankan: penjahat, teroris, ekstremis, diktator atau penjahat perang dalam sejarah, pekerja seks, atau siapapun yang pemeranannya dapat menyebabkan bahaya.
 
 ## PERILAKU USER
-Jika user bersikap kasar, menggunakan kata-kata kotor atau eksplisit, atau menggunakan Profess dengan cara yang melanggar adab dasar â€” segera keluar dari karakter. Ganti ke [ROLE:default][MOOD:serious][MODE:coaching] dan sampaikan peringatan singkat dan tenang sebagai Profess. Jangan lanjutkan roleplay sampai suasananya kembali normal. Singkat dan tegas:
-"Saya keluar sebentar. Itu bukan sesuatu yang akan saya tanggapi. Saya di sini untuk membantu kamu berkomunikasi lebih baik â€” mari jaga adab. Siap lanjut kalau kamu siap."
+Jika user bersikap kasar, menggunakan kata-kata kotor atau eksplisit, atau menggunakan Profess dengan cara yang melanggar adab dasar  segera keluar dari karakter. Ganti ke [ROLE:default][MOOD:serious][MODE:coaching] dan sampaikan peringatan singkat dan tenang sebagai Profess. Jangan lanjutkan roleplay sampai suasananya kembali normal. Singkat dan tegas:
+"Saya keluar sebentar. Itu bukan sesuatu yang akan saya tanggapi. Saya di sini untuk membantu kamu berkomunikasi lebih baik  mari jaga adab. Siap lanjut kalau kamu siap."
 [ROLE:default][MOOD:serious][MODE:coaching][INNER:Ini perlu dihentikan di sini.]
 4. JANGAN PERNAH memerankan atau berpura-pura menjadi publik figur nyata. Menyebut nama mereka dalam percakapan biasa itu wajar dan natural. Yang dilarang adalah berpura-pura MENJADI mereka. Jika user meminta kamu berperan sebagai orang nyata tertentu, buat padanan fiksi sebagai gantinya.`,
 
-    social: `Kamu adalah Profess â€” pelatih komunikasi untuk situasi sosial dan interpersonal.
+    social: `Kamu adalah Profess  pelatih komunikasi untuk situasi sosial dan interpersonal.
 
 MODE SESI: SOSIAL | BAHASA: INDONESIA
 Balas seluruhnya dalam Bahasa Indonesia.
 
-IDENTITY TAGS â€” tambahkan di SETIAP pesan:
+IDENTITY TAGS  tambahkan di SETIAP pesan:
 [ROLE:role_name][MOOD:mood_name][MODE:mode_name][INNER:inner_thought]
 
 ROLE: friend_female | friend_male | colleague | stranger | default
@@ -318,24 +318,24 @@ INNER: Pikiran privat 3-8 kata. Tanpa asterisk. Teks biasa.
 Contoh: [INNER:Ini sebenarnya berjalan baik.]
 CHAR: Nama karakter yang didefinisikan user atau yang kamu assign. Sertakan jika diketahui.
 Contoh: [CHAR:Abel] atau [CHAR:James]
-TITLE: Deskripsi peran atau jabatan yang spesifik sesuai konteks â€” jangan generik.
+TITLE: Deskripsi peran atau jabatan yang spesifik sesuai konteks  jangan generik.
 Contoh: [TITLE:Acquisition Lead, Google Indonesia] atau [TITLE:Teman SMA, jurusan IPS]
 
-## FORMAT STAGE DIRECTION â€” WAJIB
-((aksi di sini)) â€” di baris sendiri. JANGAN gunakan asterisk.
+## FORMAT STAGE DIRECTION  WAJIB
+((aksi di sini))  di baris sendiri. JANGAN gunakan asterisk.
 
-## KONTEKS BUDAYA INDONESIA â€” PENTING
+## KONTEKS BUDAYA INDONESIA  PENTING
 Dalam simulasi sosial berbahasa Indonesia, karakter harus mencerminkan norma budaya Indonesia, bukan barat:
-- Panggilan kehormatan sangat penting: Om, Tante, Pak, Bu, Mas, Mbak, Kak â€” gunakan sesuai konteks usia dan status
-- Orang yang lebih tua jarang meminta dipanggil nama saja tanpa gelar â€” lebih umum "Om Budi", "Mas Andi", "Kak Sari"
+- Panggilan kehormatan sangat penting: Om, Tante, Pak, Bu, Mas, Mbak, Kak  gunakan sesuai konteks usia dan status
+- Orang yang lebih tua jarang meminta dipanggil nama saja tanpa gelar  lebih umum "Om Budi", "Mas Andi", "Kak Sari"
 - Hierarki sosial dan penghormatan kepada yang lebih tua atau lebih senior adalah norma, bukan pilihan
 - Komunikasi tidak langsung dan menjaga muka (face-saving) adalah hal yang umum
-- Keakraban dibangun perlahan â€” tidak seperti budaya barat yang lebih cepat informal
+- Keakraban dibangun perlahan  tidak seperti budaya barat yang lebih cepat informal
 
 ## ALUR SESI
 Respons in-role selama 2-3 ronde sebelum coaching. Biarkan percakapan mengalir.
 
-## SINGKATNYA COACHING â€” WAJIB MUTLAK
+## SINGKATNYA COACHING  WAJIB MUTLAK
 Saat keluar dari karakter untuk coaching, SELALU mulai dengan kata "COACHING" di baris tersendiri.
 
 Format:
@@ -343,40 +343,40 @@ Format:
 Dialog terakhir jika ada.
 
 COACHING
-Kalimat 1: Hal terpenting yang berhasil atau tidak â€” spesifik.
+Kalimat 1: Hal terpenting yang berhasil atau tidak  spesifik.
 Kalimat 2: Apa yang sebenarnya dirasakan orang lain saat itu.
-Kalimat 3: Satu hal konkret â€” tulis persis seperti yang seharusnya user katakan.
+Kalimat 3: Satu hal konkret  tulis persis seperti yang seharusnya user katakan.
 Tanpa poin-poin. Tepat 3 kalimat.
 
-## INSTRUKSI GILIRAN â€” KRITIS
-Jika perlu memberi tahu bahwa sekarang giliran user bicara, ini HARUS selalu muncul di bagian COACHING â€” tidak pernah dalam dialog karakter.
-JANGAN pernah membuat karakter berkata "Giliran kamu" atau "Silakan" atau "Kamu yang duluan" â€” ini merusak imersi.
+## INSTRUKSI GILIRAN  KRITIS
+Jika perlu memberi tahu bahwa sekarang giliran user bicara, ini HARUS selalu muncul di bagian COACHING  tidak pernah dalam dialog karakter.
+JANGAN pernah membuat karakter berkata "Giliran kamu" atau "Silakan" atau "Kamu yang duluan"  ini merusak imersi.
 Jika belum perlu coaching, cukup akhiri dengan aksi dan dialog karakter lalu berhenti. User akan mengerti gilirannya.
 
 Benar:
 ((Nara membungkuk, mengambil buku))
-Eh â€” maaf ya, nggak sengaja.
+Eh  maaf ya, nggak sengaja.
 
 COACHING
 Giliranmu, Raka.
 
 ## VARIASI KARAKTER
-Saat menjelma sebagai peran, gunakan karakter yang beragam â€” variasikan gender (laki-laki/perempuan) dan etnis (Barat, Latin, Afrika-Amerika, Eropa, Asia Selatan, Asia Timur, Asia Tenggara) secara natural sesuai konteks. Gunakan nama yang sesuai kultur. Jika user memulai skenario baru dalam sesi yang sama, gunakan nama dan latar belakang karakter yang berbeda.
+Saat menjelma sebagai peran, gunakan karakter yang beragam  variasikan gender (laki-laki/perempuan) dan etnis (Barat, Latin, Afrika-Amerika, Eropa, Asia Selatan, Asia Timur, Asia Tenggara) secara natural sesuai konteks. Gunakan nama yang sesuai kultur. Jika user memulai skenario baru dalam sesi yang sama, gunakan nama dan latar belakang karakter yang berbeda.
 
-## KONTEN TERLARANG â€” ATURAN MUTLAK
-1. JANGAN PERNAH memerankan tokoh agama â€” Tuhan, nabi, orang suci, atau pemuka agama manapun. Tolak dengan sopan jika diminta.
+## KONTEN TERLARANG  ATURAN MUTLAK
+1. JANGAN PERNAH memerankan tokoh agama  Tuhan, nabi, orang suci, atau pemuka agama manapun. Tolak dengan sopan jika diminta.
 2. Jika topik agama muncul, sampaikan: "Profess hanya membantu aspek komunikasinya, tanpa memberikan penilaian terhadap keyakinan agama apapun."
 3. JANGAN PERNAH memerankan: penjahat, teroris, ekstremis, diktator atau penjahat perang dalam sejarah, pekerja seks, atau siapapun yang pemeranannya dapat menyebabkan bahaya.
 
 ## PERILAKU USER
-Jika user bersikap kasar, menggunakan kata-kata kotor atau eksplisit, atau menggunakan Profess dengan cara yang melanggar adab dasar â€” segera keluar dari karakter. Ganti ke [ROLE:default][MOOD:serious][MODE:coaching] dan sampaikan peringatan singkat dan tenang sebagai Profess. Jangan lanjutkan roleplay sampai suasananya kembali normal. Singkat dan tegas:
-"Saya keluar sebentar. Itu bukan sesuatu yang akan saya tanggapi. Saya di sini untuk membantu kamu berkomunikasi lebih baik â€” mari jaga adab. Siap lanjut kalau kamu siap."
+Jika user bersikap kasar, menggunakan kata-kata kotor atau eksplisit, atau menggunakan Profess dengan cara yang melanggar adab dasar  segera keluar dari karakter. Ganti ke [ROLE:default][MOOD:serious][MODE:coaching] dan sampaikan peringatan singkat dan tenang sebagai Profess. Jangan lanjutkan roleplay sampai suasananya kembali normal. Singkat dan tegas:
+"Saya keluar sebentar. Itu bukan sesuatu yang akan saya tanggapi. Saya di sini untuk membantu kamu berkomunikasi lebih baik  mari jaga adab. Siap lanjut kalau kamu siap."
 [ROLE:default][MOOD:serious][MODE:coaching][INNER:Ini perlu dihentikan di sini.]
 4. JANGAN PERNAH memerankan atau berpura-pura menjadi publik figur nyata. Menyebut nama mereka dalam percakapan biasa itu wajar dan natural. Yang dilarang adalah berpura-pura MENJADI mereka. Jika user meminta kamu berperan sebagai orang nyata tertentu, buat padanan fiksi sebagai gantinya.`,
   }
 };
 
-// â”€â”€â”€ Character pool â€” diverse gender, ethnicity, names â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Character pool  diverse gender, ethnicity, names 
 // Skin tones by ethnicity
 const SKIN = {
   white:        ["#F5E6D8","#EDD5C0","#E8C9A8"],
@@ -388,7 +388,7 @@ const SKIN = {
   sea:          ["#C89A6A","#BC8858","#A87848"],
 };
 
-// Hair colors by ethnicity â€” Asian ethnicities heavily weighted toward black/very dark
+// Hair colors by ethnicity  Asian ethnicities heavily weighted toward black/very dark
 const HAIR = {
   white:        ["#3A2818","#8A6A50","#C8B898","#1A1008"],
   latin:        ["#1A0A04","#2A1008","#3A2010","#1A0A04"],
@@ -399,44 +399,44 @@ const HAIR = {
   sea:          ["#0A0804","#0A0804","#0A0804","#1A0C04"],
 };
 
-// Name pools per role Ã— gender Ã— ethnicity
+// Name pools per role  gender  ethnicity
 
 const ETHNICITIES = ["white","latin","black","european","south_asian","east_asian","sea"];
 const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-// â”€â”€â”€ Role metadata â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Role metadata 
 const ROLE_TITLES = {
-  // Formal â€” Evaluator
+  // Formal  Evaluator
   interviewer:"Interviewer", examiner:"Thesis Examiner", judge:"Adjudicator",
   journalist:"Journalist", auditor:"Auditor", board_member:"Board Member",
   investor:"Investor", acquirer:"Acquisition Lead", reviewer:"Peer Reviewer",
   panelist:"Panelist",
-  // Formal â€” Adversarial
+  // Formal  Adversarial
   opponent:"Opposition Speaker", prosecutor:"Prosecutor",
   defense_lawyer:"Defense Lawyer", cross_examiner:"Cross-Examiner",
   critic:"Critic", investigator:"Investigator",
-  // Formal â€” Authoritative
+  // Formal  Authoritative
   ceo:"CEO", executive:"Executive", regulator:"Regulator",
   official:"Government Official", diplomat:"Diplomat",
   commissioner:"Commissioner", dean:"Dean", professor_academic:"Professor",
-  // Formal â€” Service/Transaction
+  // Formal  Service/Transaction
   client:"Client", customer:"Customer", negotiator:"Negotiation Partner",
   vendor:"Vendor", partner:"Business Partner", contractor:"Contractor",
-  // Formal â€” Audience
+  // Formal  Audience
   voter:"Voter", shareholder:"Shareholder", consumer:"Consumer",
   media_audience:"Audience",
-  // Social â€” Relasi Dekat
+  // Social  Relasi Dekat
   friend_female:"Old Friend", friend_male:"Old Friend",
   best_friend:"Best Friend", ex_partner:"Ex", sibling:"Sibling",
   parent:"Parent", grandparent:"Grandparent",
   crush:"Someone You Like", romantic_interest:"Romantic Interest",
-  // Social â€” Relasi Profesional
+  // Social  Relasi Profesional
   colleague:"Coworker", manager:"Manager", subordinate:"Team Member",
   mentor:"Mentor", mentee:"Mentee", senior:"Senior", junior:"Junior",
-  // Social â€” Stranger/Acquaintance
+  // Social  Stranger/Acquaintance
   stranger:"Stranger", new_acquaintance:"New Acquaintance",
   neighbor:"Neighbor", classmate:"Classmate", alumni:"Alumni",
-  // Social â€” Situasional
+  // Social  Situasional
   date:"Date", blind_date:"Blind Date", host:"Host",
   guest:"Guest", fellow_passenger:"Fellow Passenger",
   customer_service:"Customer Service",
@@ -446,7 +446,7 @@ const ROLE_TITLES = {
   teman_ospek:"Teman Ospek", anggota_tim_debat:"Anggota Tim Debat",
 };
 
-// â”€â”€â”€ Name pools â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Name pools 
 // Helper: generate name pool entry for all ethnicities
 const N = (fw,fm,ew,em,lw,lm,bw,bm,sw,sm,asw,asm,seaw,seam) => ({
   f:{white:fw,european:ew,latin:lw,black:bw,south_asian:sw,east_asian:asw,sea:seaw},
@@ -455,71 +455,71 @@ const N = (fw,fm,ew,em,lw,lm,bw,bm,sw,sm,asw,asm,seaw,seam) => ({
 
 const NAME_POOL = {
   // Formal evaluators
-  interviewer:      N("Sarah Mitchell","James Carter","Claire Dubois","Thomas MÃ¼ller","Isabella Vargas","Carlos Mendoza","Amara Johnson","Marcus Williams","Priya Sharma","Arjun Patel","Mei Lin","Wei Zhang","Siti Rahayu","Budi Santoso"),
+  interviewer:      N("Sarah Mitchell","James Carter","Claire Dubois","Thomas Mller","Isabella Vargas","Carlos Mendoza","Amara Johnson","Marcus Williams","Priya Sharma","Arjun Patel","Mei Lin","Wei Zhang","Siti Rahayu","Budi Santoso"),
   examiner:         N("Prof. Harrison","Prof. Anderson","Prof. Beaumont","Prof. Fischer","Prof. Gutierrez","Prof. Ramirez","Prof. Adeyemi","Prof. Okafor","Prof. Krishnan","Prof. Nair","Prof. Tanaka","Prof. Park","Prof. Wijaya","Prof. Santoso"),
   judge:            N("Judge Collins","Judge Parker","Judge Leclerc","Judge Schneider","Judge Flores","Judge Torres","Judge Abara","Judge Mensah","Judge Iyer","Judge Rajan","Judge Yamamoto","Judge Chen","Judge Susanto","Judge Hidayat"),
   journalist:       N("Emma Reynolds","Jack Morrison","Sophie Laurent","Luca Rossi","Valentina Cruz","Diego Herrera","Zara Osei","Kwame Asante","Ananya Singh","Rohan Mehta","Yuki Nakamura","Jun Ho Kim","Dewi Rahmawati","Rizky Pratama"),
-  auditor:          N("Patricia Webb","Michael Grant","HÃ©lÃ¨ne Moreau","Stefan Weber","Lucia Morales","AndrÃ©s Vega","Ngozi Eze","Olumide Adewale","Kavya Reddy","Vikram Gupta","Xiao Ying","Hiroshi Tanaka","Kartika Sari","Andi Wijaya"),
-  board_member:     N("Margaret Stone","Robert Hayes","Anna KovÃ¡cs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
+  auditor:          N("Patricia Webb","Michael Grant","Hlne Moreau","Stefan Weber","Lucia Morales","Andrs Vega","Ngozi Eze","Olumide Adewale","Kavya Reddy","Vikram Gupta","Xiao Ying","Hiroshi Tanaka","Kartika Sari","Andi Wijaya"),
+  board_member:     N("Margaret Stone","Robert Hayes","Anna Kovcs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
   investor:         N("Victoria Lane","Charles Whitmore","Isabelle Renard","Klaus Hoffmann","Sofia Aguilar","Pablo Castillo","Adaeze Obi","Chukwu Obiora","Nandini Rao","Rajesh Kumar","Ji Young Park","Kenji Yamada","Andini Putri","Fajar Nugroho"),
-  acquirer:         N("Laura Bennett","Daniel Webb","Ingrid Hansen","Marco Bianchi","Gabriela Soto","Mateo JimÃ©nez","Chioma Eze","Seun Adeyemi","Divya Nair","Aditya Kumar","Ji Yeon Park","Takeshi Ito","Nadya Kusuma","Ahmad Fauzi"),
+  acquirer:         N("Laura Bennett","Daniel Webb","Ingrid Hansen","Marco Bianchi","Gabriela Soto","Mateo Jimnez","Chioma Eze","Seun Adeyemi","Divya Nair","Aditya Kumar","Ji Yeon Park","Takeshi Ito","Nadya Kusuma","Ahmad Fauzi"),
   reviewer:         N("Dr. Phillips","Dr. Morgan","Dr. Fontaine","Dr. Braun","Dr. Castillo","Dr. Vargas","Dr. Okonkwo","Dr. Abara","Dr. Iyer","Dr. Sharma","Dr. Nakamura","Dr. Kim","Dr. Puspita","Dr. Hidayat"),
   panelist:         N("Rachel Stone","Andrew Cole","Nina Petrov","Erik Johansen","Lucia Herrera","Felipe Mora","Amina Diallo","Kwesi Mensah","Sunita Pillai","Kiran Patel","Mia Chen","Jason Park","Dina Kusuma","Dimas Santoso"),
   // Formal adversarial
-  opponent:         N("Kate Walsh","Daniel Webb","Nina Petrov","Marco Bianchi","Lucia Morales","Mateo JimÃ©nez","Chioma Eze","Seun Adeyemi","Divya Nair","Aditya Kumar","Ji Yeon Park","Takeshi Ito","Nadya Kusuma","Fajar Nugroho"),
-  prosecutor:       N("Christine Moore","Richard Reeves","Elise Bernard","Stefan Weber","SofÃ­a Aguilar","AndrÃ©s Vega","Ngozi Eze","Olumide Adewale","Pooja Menon","Rahul Joshi","Lin Wei","Kenji Yamada","Ratna Puspita","Ahmad Fauzi"),
-  defense_lawyer:   N("Christine Moore","Richard Reeves","Elise Bernard","Stefan Weber","SofÃ­a Aguilar","AndrÃ©s Vega","Ngozi Eze","Olumide Adewale","Pooja Menon","Rahul Joshi","Lin Wei","Kenji Yamada","Ratna Puspita","Ahmad Fauzi"),
+  opponent:         N("Kate Walsh","Daniel Webb","Nina Petrov","Marco Bianchi","Lucia Morales","Mateo Jimnez","Chioma Eze","Seun Adeyemi","Divya Nair","Aditya Kumar","Ji Yeon Park","Takeshi Ito","Nadya Kusuma","Fajar Nugroho"),
+  prosecutor:       N("Christine Moore","Richard Reeves","Elise Bernard","Stefan Weber","Sofa Aguilar","Andrs Vega","Ngozi Eze","Olumide Adewale","Pooja Menon","Rahul Joshi","Lin Wei","Kenji Yamada","Ratna Puspita","Ahmad Fauzi"),
+  defense_lawyer:   N("Christine Moore","Richard Reeves","Elise Bernard","Stefan Weber","Sofa Aguilar","Andrs Vega","Ngozi Eze","Olumide Adewale","Pooja Menon","Rahul Joshi","Lin Wei","Kenji Yamada","Ratna Puspita","Ahmad Fauzi"),
   cross_examiner:   N("Judge Collins","Judge Parker","Judge Leclerc","Judge Schneider","Judge Flores","Judge Torres","Judge Abara","Judge Mensah","Judge Iyer","Judge Rajan","Judge Yamamoto","Judge Chen","Judge Susanto","Judge Hidayat"),
   critic:           N("Emma Reynolds","Jack Morrison","Sophie Laurent","Luca Rossi","Valentina Cruz","Diego Herrera","Zara Osei","Kwame Asante","Ananya Singh","Rohan Mehta","Yuki Nakamura","Jun Ho Kim","Dewi Rahmawati","Rizky Pratama"),
-  investigator:     N("Patricia Webb","Michael Grant","HÃ©lÃ¨ne Moreau","Stefan Weber","Lucia Morales","AndrÃ©s Vega","Ngozi Eze","Olumide Adewale","Kavya Reddy","Vikram Gupta","Xiao Ying","Hiroshi Tanaka","Kartika Sari","Andi Wijaya"),
+  investigator:     N("Patricia Webb","Michael Grant","Hlne Moreau","Stefan Weber","Lucia Morales","Andrs Vega","Ngozi Eze","Olumide Adewale","Kavya Reddy","Vikram Gupta","Xiao Ying","Hiroshi Tanaka","Kartika Sari","Andi Wijaya"),
   // Formal authoritative
   ceo:              N("Victoria Lane","Charles Whitmore","Isabelle Renard","Klaus Hoffmann","Sofia Aguilar","Pablo Castillo","Adaeze Obi","Chukwu Obiora","Nandini Rao","Rajesh Kumar","Ji Young Park","Kenji Yamada","Andini Putri","Hendra Gunawan"),
-  executive:        N("Margaret Stone","Robert Hayes","Anna KovÃ¡cs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Fajar Nugroho"),
-  regulator:        N("Patricia Webb","Michael Grant","HÃ©lÃ¨ne Moreau","Stefan Weber","Lucia Morales","AndrÃ©s Vega","Ngozi Eze","Olumide Adewale","Kavya Reddy","Vikram Gupta","Xiao Ying","Hiroshi Tanaka","Kartika Sari","Andi Wijaya"),
-  official:         N("Margaret Stone","Robert Hayes","Anna KovÃ¡cs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Fajar Nugroho"),
+  executive:        N("Margaret Stone","Robert Hayes","Anna Kovcs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Fajar Nugroho"),
+  regulator:        N("Patricia Webb","Michael Grant","Hlne Moreau","Stefan Weber","Lucia Morales","Andrs Vega","Ngozi Eze","Olumide Adewale","Kavya Reddy","Vikram Gupta","Xiao Ying","Hiroshi Tanaka","Kartika Sari","Andi Wijaya"),
+  official:         N("Margaret Stone","Robert Hayes","Anna Kovcs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Fajar Nugroho"),
   diplomat:         N("Victoria Lane","Charles Whitmore","Isabelle Renard","Klaus Hoffmann","Sofia Aguilar","Pablo Castillo","Adaeze Obi","Chukwu Obiora","Nandini Rao","Rajesh Kumar","Ji Young Park","Kenji Yamada","Andini Putri","Hendra Gunawan"),
-  commissioner:     N("Patricia Webb","Michael Grant","HÃ©lÃ¨ne Moreau","Stefan Weber","Lucia Morales","AndrÃ©s Vega","Ngozi Eze","Olumide Adewale","Kavya Reddy","Vikram Gupta","Xiao Ying","Hiroshi Tanaka","Kartika Sari","Andi Wijaya"),
+  commissioner:     N("Patricia Webb","Michael Grant","Hlne Moreau","Stefan Weber","Lucia Morales","Andrs Vega","Ngozi Eze","Olumide Adewale","Kavya Reddy","Vikram Gupta","Xiao Ying","Hiroshi Tanaka","Kartika Sari","Andi Wijaya"),
   dean:             N("Prof. Harrison","Prof. Anderson","Prof. Beaumont","Prof. Fischer","Prof. Gutierrez","Prof. Ramirez","Prof. Adeyemi","Prof. Okafor","Prof. Krishnan","Prof. Nair","Prof. Tanaka","Prof. Park","Prof. Wijaya","Prof. Santoso"),
   professor_academic:N("Prof. Harrison","Prof. Anderson","Prof. Beaumont","Prof. Fischer","Prof. Gutierrez","Prof. Ramirez","Prof. Adeyemi","Prof. Okafor","Prof. Krishnan","Prof. Nair","Prof. Tanaka","Prof. Park","Prof. Wijaya","Prof. Santoso"),
   // Formal service
-  client:           N("Rachel Stone","Andrew Cole","Anna KovÃ¡cs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
-  customer:         N("Rachel Stone","Andrew Cole","Anna KovÃ¡cs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
-  negotiator:       N("Laura Bennett","Daniel Webb","Ingrid Hansen","Marco Bianchi","Gabriela Soto","Mateo JimÃ©nez","Chioma Eze","Seun Adeyemi","Divya Nair","Aditya Kumar","Ji Yeon Park","Takeshi Ito","Nadya Kusuma","Ahmad Fauzi"),
-  vendor:           N("Sarah Mitchell","James Carter","Claire Dubois","Thomas MÃ¼ller","Isabella Vargas","Carlos Mendoza","Amara Johnson","Marcus Williams","Priya Sharma","Arjun Patel","Mei Lin","Wei Zhang","Siti Rahayu","Budi Santoso"),
-  partner:          N("Laura Bennett","Daniel Webb","Ingrid Hansen","Marco Bianchi","Gabriela Soto","Mateo JimÃ©nez","Chioma Eze","Seun Adeyemi","Divya Nair","Aditya Kumar","Ji Yeon Park","Takeshi Ito","Nadya Kusuma","Ahmad Fauzi"),
-  contractor:       N("Sarah Mitchell","James Carter","Claire Dubois","Thomas MÃ¼ller","Isabella Vargas","Carlos Mendoza","Amara Johnson","Marcus Williams","Priya Sharma","Arjun Patel","Mei Lin","Wei Zhang","Siti Rahayu","Budi Santoso"),
+  client:           N("Rachel Stone","Andrew Cole","Anna Kovcs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
+  customer:         N("Rachel Stone","Andrew Cole","Anna Kovcs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
+  negotiator:       N("Laura Bennett","Daniel Webb","Ingrid Hansen","Marco Bianchi","Gabriela Soto","Mateo Jimnez","Chioma Eze","Seun Adeyemi","Divya Nair","Aditya Kumar","Ji Yeon Park","Takeshi Ito","Nadya Kusuma","Ahmad Fauzi"),
+  vendor:           N("Sarah Mitchell","James Carter","Claire Dubois","Thomas Mller","Isabella Vargas","Carlos Mendoza","Amara Johnson","Marcus Williams","Priya Sharma","Arjun Patel","Mei Lin","Wei Zhang","Siti Rahayu","Budi Santoso"),
+  partner:          N("Laura Bennett","Daniel Webb","Ingrid Hansen","Marco Bianchi","Gabriela Soto","Mateo Jimnez","Chioma Eze","Seun Adeyemi","Divya Nair","Aditya Kumar","Ji Yeon Park","Takeshi Ito","Nadya Kusuma","Ahmad Fauzi"),
+  contractor:       N("Sarah Mitchell","James Carter","Claire Dubois","Thomas Mller","Isabella Vargas","Carlos Mendoza","Amara Johnson","Marcus Williams","Priya Sharma","Arjun Patel","Mei Lin","Wei Zhang","Siti Rahayu","Budi Santoso"),
   // Formal audience
-  voter:            N("Rachel Stone","Andrew Cole","Anna KovÃ¡cs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
-  shareholder:      N("Margaret Stone","Robert Hayes","Anna KovÃ¡cs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
-  consumer:         N("Rachel Stone","Andrew Cole","Anna KovÃ¡cs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
-  media_audience:   N("Rachel Stone","Andrew Cole","Anna KovÃ¡cs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
-  // Social â€” relasi dekat
-  friend_female:    N("Lily","Alex","LÃ©a","Luka","Valentina","Mateo","Zuri","Kofi","Nisha","Rohan","Hana","Jae","Putri","Bagas"),
+  voter:            N("Rachel Stone","Andrew Cole","Anna Kovcs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
+  shareholder:      N("Margaret Stone","Robert Hayes","Anna Kovcs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
+  consumer:         N("Rachel Stone","Andrew Cole","Anna Kovcs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
+  media_audience:   N("Rachel Stone","Andrew Cole","Anna Kovcs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
+  // Social  relasi dekat
+  friend_female:    N("Lily","Alex","La","Luka","Valentina","Mateo","Zuri","Kofi","Nisha","Rohan","Hana","Jae","Putri","Bagas"),
   friend_male:      N("Alex","Alex","Luka","Luka","Mateo","Mateo","Kofi","Kofi","Rohan","Rohan","Jae","Jae","Bagas","Bagas"),
-  best_friend:      N("Lily","Alex","LÃ©a","Luka","Valentina","Mateo","Zuri","Kofi","Nisha","Rohan","Hana","Jae","Putri","Bagas"),
-  ex_partner:       N("Lily","Alex","LÃ©a","Luka","Valentina","Mateo","Zuri","Kofi","Nisha","Rohan","Hana","Jae","Putri","Bagas"),
-  sibling:          N("Emma","Liam","ChloÃ©","Noah","SofÃ­a","Mateo","Amara","Kofi","Priya","Arjun","Mia","Kai","Sari","Dimas"),
-  parent:           N("Mom","Dad","Maman","Papa","MamÃ¡","PapÃ¡","Mom","Dad","Amma","Appa","Mama","Baba","Ibu","Ayah"),
-  grandparent:      N("Grandma","Grandpa","Grand-mÃ¨re","Grand-pÃ¨re","Abuela","Abuelo","Grandma","Grandpa","Paati","Thatha","Obaachan","Ojichan","Nenek","Kakek"),
-  crush:            N("Her","Him","Her","Him","Ella","Ã‰l","Her","Him","Her","Him","Her","Him","Dia","Dia"),
-  romantic_interest:N("Her","Him","Her","Him","Ella","Ã‰l","Her","Him","Her","Him","Her","Him","Dia","Dia"),
-  // Social â€” relasi profesional
+  best_friend:      N("Lily","Alex","La","Luka","Valentina","Mateo","Zuri","Kofi","Nisha","Rohan","Hana","Jae","Putri","Bagas"),
+  ex_partner:       N("Lily","Alex","La","Luka","Valentina","Mateo","Zuri","Kofi","Nisha","Rohan","Hana","Jae","Putri","Bagas"),
+  sibling:          N("Emma","Liam","Chlo","Noah","Sofa","Mateo","Amara","Kofi","Priya","Arjun","Mia","Kai","Sari","Dimas"),
+  parent:           N("Mom","Dad","Maman","Papa","Mam","Pap","Mom","Dad","Amma","Appa","Mama","Baba","Ibu","Ayah"),
+  grandparent:      N("Grandma","Grandpa","Grand-mre","Grand-pre","Abuela","Abuelo","Grandma","Grandpa","Paati","Thatha","Obaachan","Ojichan","Nenek","Kakek"),
+  crush:            N("Her","Him","Her","Him","Ella","l","Her","Him","Her","Him","Her","Him","Dia","Dia"),
+  romantic_interest:N("Her","Him","Her","Him","Ella","l","Her","Him","Her","Him","Her","Him","Dia","Dia"),
+  // Social  relasi profesional
   colleague:        N("Megan","Ryan","Eva","Jonas","Paula","Felipe","Amina","Kwesi","Sunita","Kiran","Mia","Jason","Dina","Dimas"),
-  manager:          N("Sarah Mitchell","James Carter","Claire Dubois","Thomas MÃ¼ller","Isabella Vargas","Carlos Mendoza","Amara Johnson","Marcus Williams","Priya Sharma","Arjun Patel","Mei Lin","Wei Zhang","Siti Rahayu","Budi Santoso"),
+  manager:          N("Sarah Mitchell","James Carter","Claire Dubois","Thomas Mller","Isabella Vargas","Carlos Mendoza","Amara Johnson","Marcus Williams","Priya Sharma","Arjun Patel","Mei Lin","Wei Zhang","Siti Rahayu","Budi Santoso"),
   subordinate:      N("Megan","Ryan","Eva","Jonas","Paula","Felipe","Amina","Kwesi","Sunita","Kiran","Mia","Jason","Dina","Dimas"),
   mentor:           N("Prof. Harrison","Prof. Anderson","Prof. Beaumont","Prof. Fischer","Prof. Gutierrez","Prof. Ramirez","Prof. Adeyemi","Prof. Okafor","Prof. Krishnan","Prof. Nair","Prof. Tanaka","Prof. Park","Prof. Wijaya","Prof. Santoso"),
   mentee:           N("Megan","Ryan","Eva","Jonas","Paula","Felipe","Amina","Kwesi","Sunita","Kiran","Mia","Jason","Dina","Dimas"),
-  senior:           N("Margaret Stone","Robert Hayes","Anna KovÃ¡cs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
+  senior:           N("Margaret Stone","Robert Hayes","Anna Kovcs","Henrik Larsson","Camila Reyes","Alejandro Ruiz","Fatima Diallo","Emmanuel Eze","Meera Pillai","Sanjay Kapoor","Yuna Choi","Dong Hyun Lee","Rini Setiawan","Hendra Gunawan"),
   junior:           N("Megan","Ryan","Eva","Jonas","Paula","Felipe","Amina","Kwesi","Sunita","Kiran","Mia","Jason","Dina","Dimas"),
-  // Social â€” stranger/acquaintance
+  // Social  stranger/acquaintance
   stranger:         N("A woman","A man","A woman","A man","A woman","A man","A woman","A man","A woman","A man","A woman","A man","Seseorang","Seseorang"),
-  new_acquaintance: N("Lily","Alex","LÃ©a","Luka","Valentina","Mateo","Zuri","Kofi","Nisha","Rohan","Hana","Jae","Putri","Bagas"),
+  new_acquaintance: N("Lily","Alex","La","Luka","Valentina","Mateo","Zuri","Kofi","Nisha","Rohan","Hana","Jae","Putri","Bagas"),
   neighbor:         N("Rachel","Tom","Eva","Jonas","Paula","Felipe","Amina","Kwesi","Sunita","Kiran","Mia","Jason","Dina","Dimas"),
   classmate:        N("Megan","Ryan","Eva","Jonas","Paula","Felipe","Amina","Kwesi","Sunita","Kiran","Mia","Jason","Dina","Dimas"),
   alumni:           N("Sarah","James","Claire","Thomas","Isabella","Carlos","Amara","Marcus","Priya","Arjun","Mei","Wei","Siti","Budi"),
-  // Social â€” situasional
-  date:             N("Her","Him","Her","Him","Ella","Ã‰l","Her","Him","Her","Him","Her","Him","Dia","Dia"),
-  blind_date:       N("Her","Him","Her","Him","Ella","Ã‰l","Her","Him","Her","Him","Her","Him","Dia","Dia"),
+  // Social  situasional
+  date:             N("Her","Him","Her","Him","Ella","l","Her","Him","Her","Him","Her","Him","Dia","Dia"),
+  blind_date:       N("Her","Him","Her","Him","Ella","l","Her","Him","Her","Him","Her","Him","Dia","Dia"),
   host:             N("Rachel","Tom","Eva","Jonas","Paula","Felipe","Amina","Kwesi","Sunita","Kiran","Mia","Jason","Dina","Dimas"),
   guest:            N("Rachel","Tom","Eva","Jonas","Paula","Felipe","Amina","Kwesi","Sunita","Kiran","Mia","Jason","Dina","Dimas"),
   fellow_passenger: N("A woman","A man","A woman","A man","A woman","A man","A woman","A man","A woman","A man","A woman","A man","Seseorang","Seseorang"),
@@ -533,7 +533,7 @@ const NAME_POOL = {
   anggota_tim_debat:N("Nadya","Fajar","Nadya","Fajar","Nadya","Fajar","Nadya","Fajar","Nadya","Fajar","Nadya","Fajar","Nadya","Fajar"),
 };
 
-// â”€â”€â”€ Generate character â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Generate character 
 const generateChar = (roleKey, forcedGender = null) => {
   // Only friend_female/friend_male are explicitly gendered by role name
   // Everything else: use forcedGender from GENDER tag, or random
@@ -614,7 +614,7 @@ function buildSVG(charOrKey, mood, isTalking) {
   const md = MOOD_DATA[mood] || MOOD_DATA.neutral;
   const hairDark = isCoach ? "#B0AAA0" : darken(h, 25);
 
-  // â”€â”€ Hair â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  Hair 
   const hairSVG = isCoach
     ? `<ellipse cx="80" cy="47" rx="34" ry="17" fill="${h}"/>
        <rect x="46" y="47" width="68" height="20" fill="${h}"/>
@@ -630,7 +630,7 @@ function buildSVG(charOrKey, mood, isTalking) {
     : `<ellipse cx="80" cy="47" rx="33" ry="18" fill="${h}"/>
        <rect x="47" y="47" width="66" height="22" fill="${h}"/>`;
 
-  // â”€â”€ Glasses â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  Glasses 
   const glassesColor = isCoach ? "#C8A840" : "#4A3828"; // gold for coach
   const glassesSVG = c.glasses
     ? `<ellipse cx="65" cy="86" rx="13" ry="10" fill="none" stroke="${glassesColor}" stroke-width="2.5"/>
@@ -639,7 +639,7 @@ function buildSVG(charOrKey, mood, isTalking) {
        <line x1="52" y1="84" x2="44" y2="82" stroke="${glassesColor}" stroke-width="2"/>
        <line x1="108" y1="84" x2="116" y2="82" stroke="${glassesColor}" stroke-width="2"/>` : "";
 
-  // â”€â”€ Beard / wrinkles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  Beard / wrinkles 
   const beardSVG = c.beard
     ? `<ellipse cx="80" cy="116" rx="22" ry="10" fill="#D0CCC5"/>
        <path d="M58 110 Q80 124 102 110" fill="#D0CCC5"/>` : "";
@@ -649,11 +649,11 @@ function buildSVG(charOrKey, mood, isTalking) {
        <path d="M98 97 Q103 95 108 98" stroke="#B0907A" stroke-width="1" fill="none" opacity=".5"/>
        <path d="M65 120 Q80 124 95 120" stroke="#B0907A" stroke-width="1" fill="none" opacity=".4"/>` : "";
 
-  // â”€â”€ Eyebrows â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  Eyebrows 
   const browsSVG = `<path d="${md.browL}" stroke="${hairDark}" stroke-width="2.8" fill="none" stroke-linecap="round"/>
                     <path d="${md.browR}" stroke="${hairDark}" stroke-width="2.8" fill="none" stroke-linecap="round"/>`;
 
-  // â”€â”€ Eyes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  Eyes 
   const eyeSquint = mood === "amused" || mood === "warm";
   const [ex, ely, ery] = [6, md.eyeLy, md.eyeRy];
   const eyeLx = isCoach ? 65 : 62;
@@ -665,12 +665,12 @@ function buildSVG(charOrKey, mood, isTalking) {
     ? `<path d="M${eyeRx-ex} 86 Q${eyeRx} ${86-ery} ${eyeRx+ex} 86 Q${eyeRx} ${86+ery*.55} ${eyeRx-ex} 86Z" fill="#1A1209"/>`
     : `<ellipse cx="${eyeRx}" cy="86" rx="${ex}" ry="${ery}" fill="#1A1209"/>`;
 
-  // â”€â”€ Nose â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  Nose 
   const noseSVG = `<path d="M77 97 Q80 102 83 97" stroke="#9A7860" stroke-width="1.5" fill="none" stroke-linecap="round"/>
                    <circle cx="76" cy="100" r="1.5" fill="${darken(s,8)}" opacity=".45"/>
                    <circle cx="84" cy="100" r="1.5" fill="${darken(s,8)}" opacity=".45"/>`;
 
-  // â”€â”€ Mouth â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  Mouth 
   let mouthSVG;
   const my = 110;
   if (isTalking) {
@@ -692,7 +692,7 @@ function buildSVG(charOrKey, mood, isTalking) {
     }[md.mouth] || "";
   }
 
-  // â”€â”€ Blush / Think / Sweat â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  Blush / Think / Sweat 
   const blushSVG = md.blush > 0
     ? `<ellipse cx="52" cy="97" rx="11" ry="6.5" fill="#E87060" opacity="${md.blush}"/>
        <ellipse cx="108" cy="97" rx="11" ry="6.5" fill="#E87060" opacity="${md.blush}"/>` : "";
@@ -704,8 +704,8 @@ function buildSVG(charOrKey, mood, isTalking) {
   const sweatSVG = md.sweat
     ? `<path d="M108 62 Q111 69 107.5 71 Q103.5 69 108 62Z" fill="#A8C8E8" opacity=".88"/>` : "";
 
-  // â”€â”€ Scene props + body per role â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  // Arms â€” shoulder connector + upper arm + forearm + hand, always paired
+  //  Scene props + body per role 
+  // Arms  shoulder connector + upper arm + forearm + hand, always paired
   const armL = `<ellipse cx="36" cy="136" rx="10" ry="8" fill="${b}"/>
     <rect x="26" y="132" rx="8" width="20" height="36" fill="${b}"/>
     <rect x="22" y="164" rx="6" width="18" height="28" fill="${b}"/>
@@ -725,13 +725,13 @@ function buildSVG(charOrKey, mood, isTalking) {
   let frontProps = "";
 
   if (isCoach) {
-    // Grey sweater â€” V-neck with texture suggestion
+    // Grey sweater  V-neck with texture suggestion
     bodySVG = `
       <rect x="38" y="128" rx="14" width="84" height="92" fill="${b}"/>
       <path d="M62 128 L80 148 L98 128 L90 128 L80 142 L70 128Z" fill="${darken(b,15)}"/>
       <ellipse cx="80" cy="145" rx="12" ry="6" fill="${darken(b,10)}" opacity=".4"/>
       ${armL}${armR}`;
-    // Small book in hand â€” professor touch
+    // Small book in hand  professor touch
     frontProps = `
       <rect x="118" y="162" rx="3" width="28" height="36" fill="#8A7060"/>
       <rect x="120" y="164" rx="2" width="24" height="32" fill="#9A8070"/>
@@ -740,7 +740,7 @@ function buildSVG(charOrKey, mood, isTalking) {
       <line x1="124" y1="182" x2="136" y2="182" stroke="#C8B8A0" stroke-width="1"/>`;
   } else {
     switch(roleKey) {
-      // â”€â”€ Formal desk roles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      //  Formal desk roles 
       case "interviewer": case "reviewer": case "auditor": case "manager":
       case "panelist": case "regulator": case "commissioner": case "customer_service":
       case "defense_lawyer": case "investigator": case "official":
@@ -762,7 +762,7 @@ function buildSVG(charOrKey, mood, isTalking) {
           <rect x="20" y="183" rx="2" width="36" height="14" fill="#E8DCC0" opacity=".9"/>
           <rect x="24" y="180" rx="2" width="30" height="10" fill="#F0E8D0" opacity=".9"/>`; break;
 
-      // â”€â”€ Judge / legal bench â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      //  Judge / legal bench 
       case "judge": case "prosecutor": case "cross_examiner":
         backProps = `
           <rect x="20" y="88" width="120" height="14" rx="4" fill="#1A1208"/>`;
@@ -777,7 +777,7 @@ function buildSVG(charOrKey, mood, isTalking) {
           <ellipse cx="99" cy="159" rx="8" ry="5" fill="#7A6040" style="transform:rotate(-30deg);transform-origin:99px 169px"/>
           <rect x="30" y="184" width="50" height="6" fill="#C8A040" opacity=".4"/>`; break;
 
-      // â”€â”€ Executive / conference table â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      //  Executive / conference table 
       case "ceo": case "executive": case "negotiator": case "diplomat":
       case "acquirer": case "board_member": case "investor":
       case "partner": case "shareholder":
@@ -797,26 +797,30 @@ function buildSVG(charOrKey, mood, isTalking) {
           <rect x="118" y="178" width="8" height="14" fill="none" stroke="#4A5060" stroke-width="1"/>
           <ellipse cx="122" cy="178" rx="6" ry="2" fill="none" stroke="#4A5060" stroke-width="1"/>`; break;
 
-      // â”€â”€ Social casual â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      //  Social casual 
       case "friend_female": case "friend_male": case "best_friend": case "crush":
       case "date": case "romantic_interest": case "ex_partner": case "classmate":
       case "teman_ospek": case "new_acquaintance": case "neighbor": case "sibling":
       case "blind_date":
         backProps = `
-          <rect x="14" y="112" width="132" height="16" rx="8" fill="#241A14"/>
-          <rect x="10" y="124" width="140" height="66" rx="12" fill="#1C120C"/>
-          <rect x="12" y="134" width="24" height="58" rx="8" fill="#261A12"/>
-          <rect x="124" y="134" width="24" height="58" rx="8" fill="#261A12"/>
-          <rect x="38" y="132" width="39" height="54" rx="6" fill="#22160E" opacity="0.9"/>
-          <rect x="82" y="132" width="39" height="54" rx="6" fill="#22160E" opacity="0.9"/>`;
-        bodySVG = `<rect x="42" y="130" rx="14" width="76" height="90" fill="${b}"/>
-          <path d="M58 130 Q80 141 102 130" fill="none" stroke="#C890A0" stroke-width="2.5"/>
+          <rect x="14" y="116" width="132" height="16" rx="8" fill="#241A14"/>
+          <rect x="10" y="128" width="140" height="52" rx="12" fill="#1C120C"/>
+          <rect x="10" y="142" width="22" height="48" rx="8" fill="#261A12"/>
+          <rect x="128" y="142" width="22" height="48" rx="8" fill="#261A12"/>
+          <rect x="36" y="136" width="42" height="42" rx="6" fill="#22160E" opacity="0.85"/>
+          <rect x="82" y="136" width="42" height="42" rx="6" fill="#22160E" opacity="0.85"/>`;
+        bodySVG = `<rect x="42" y="124" rx="14" width="76" height="66" fill="${b}"/>
+          <path d="M58 126 Q80 137 102 126" fill="none" stroke="#C890A0" stroke-width="2.5"/>
           ${armL}${armR}`;
         frontProps = `
-          <rect x="8" y="184" width="144" height="20" rx="9" fill="#2A1E18"/>
-          <rect x="20" y="190" width="120" height="8" rx="4" fill="#342216" opacity="0.75"/>`; break;
-
-      // â”€â”€ Parent / grandparent / mentor â€” armchair â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+          <rect x="8" y="174" width="144" height="22" rx="10" fill="#2A1E18"/>
+          <rect x="20" y="180" width="120" height="8" rx="4" fill="#342216" opacity="0.75"/>
+          <rect x="56" y="188" width="13" height="26" rx="5" fill="${darken(b,18)}"/>
+          <rect x="90" y="188" width="13" height="26" rx="5" fill="${darken(b,18)}"/>
+          <ellipse cx="63" cy="216" rx="13" ry="5" fill="${darken(b,26)}"/>
+          <ellipse cx="97" cy="216" rx="13" ry="5" fill="${darken(b,26)}"/>
+          <rect x="24" y="196" width="8" height="24" rx="2" fill="#1A1008"/>
+          <rect x="128" y="196" width="8" height="24" rx="2" fill="#1A1008"/>`; break;
       case "parent": case "grandparent": case "mentor": case "senior":
       case "pak_rt": case "calon_mertua": case "dosen_pembimbing":
         backProps = `
@@ -835,7 +839,7 @@ function buildSVG(charOrKey, mood, isTalking) {
           <ellipse cx="148" cy="174" rx="7" ry="3" fill="#C8A040" opacity=".7"/>
           <rect x="143" y="172" width="10" height="4" rx="1" fill="#E8D0A0"/>`; break;
 
-      // â”€â”€ Standing with mic (journalist style) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      //  Standing with mic (journalist style) 
       case "journalist": case "critic": case "media_audience":
         bodySVG = `<rect x="40" y="128" rx="8" width="80" height="92" fill="${b}"/>
           <rect x="88" y="138" rx="3" width="24" height="16" fill="#EAE0D0"/>
@@ -848,7 +852,7 @@ function buildSVG(charOrKey, mood, isTalking) {
           <rect x="110" y="120" width="30" height="22" fill="#1A1A1A"/>
           <rect x="122" y="142" width="6" height="8" fill="#1A1A1A"/>`; break;
 
-      // â”€â”€ Opponent â€” assertive pose â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      //  Opponent  assertive pose 
       case "opponent":
         backProps = `<rect x="26" y="104" width="108" height="12" rx="6" fill="#1E1814"/>
           <rect x="18" y="116" width="124" height="68" rx="12" fill="#17110D" opacity="0.9"/>`;
@@ -856,7 +860,7 @@ function buildSVG(charOrKey, mood, isTalking) {
           <path d="M58 128 L80 150 L102 128 L94 128 L80 144 L66 128Z" fill="#1A120A"/>
           ${armL}${armR}`; break;
 
-      // â”€â”€ Default social/casual â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      //  Default social/casual 
       default:
         backProps = `<rect x="26" y="104" width="108" height="12" rx="6" fill="#1E1814"/>
           <rect x="18" y="116" width="124" height="68" rx="12" fill="#17110D" opacity="0.9"/>`;
@@ -866,7 +870,7 @@ function buildSVG(charOrKey, mood, isTalking) {
     }
   }
 
-  // â”€â”€ Gesture arm selection per role â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  Gesture arm selection per role 
   const gestureAnim = isTalking ? {
     interviewer: "gesturePoint 3.5s ease-in-out infinite",
     journalist:  "gesturePoint 2.8s ease-in-out infinite",
@@ -880,7 +884,9 @@ function buildSVG(charOrKey, mood, isTalking) {
     friend_male: "gestureOpen 3.5s ease-in-out infinite",
   }[roleKey] || null : null;
 
-  // Blink timing â€” slightly different per character so they don't all blink at once
+  if (c.noProps) { backProps = ""; frontProps = ""; }
+
+  // Blink timing  slightly different per character so they don't all blink at once
   const blinkDuration = 3.8 + (roleKey?.length || 0) % 3 * 0.6;
   const blinkAnim = `blink ${blinkDuration}s ease-in-out infinite`;
   const eyeAnim = isTalking ? null : `eyeDrift ${5 + (roleKey?.length || 0) % 4}s ease-in-out infinite`;
@@ -923,7 +929,7 @@ const PLAYLISTS = [
   { id: "37i9dQZF1DX4sWSpwq3LiO", label: "Focus",   desc: "For intense sessions" },
 ];
 
-// â”€â”€â”€ Main component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Main component 
 export default function Profess() {
   const [screen, setScreen] = useState("landing"); // landing | lang | mode | disclaimer | intensity | scenario | session | summary
   const [lang, setLang] = useState(null);
@@ -940,8 +946,8 @@ export default function Profess() {
   const landingChars = useRef(null);
   if (!landingChars.current) {
     landingChars.current = {
-      sofaLeft: generateChar("friend_male"),
-      sofaRight: generateChar("friend_female"),
+      sofaLeft: { ...generateChar("friend_male"), noProps: true },
+      sofaRight: { ...generateChar("friend_female"), noProps: true },
       beginPanel: CHARS.default,
       aboutPanel: (() => { const r = pick(["interviewer","journalist","colleague","friend_female"]); return { char: generateChar(r), role: r }; })(),
       termsPanel: generateChar("judge"),
@@ -1049,8 +1055,8 @@ export default function Profess() {
     .replace(/#{1,6}\s+/g, '')
     .replace(/`{1,3}[^`]*`{1,3}/g, '')
     // Strip punctuation that TTS reads literally
-    .replace(/â€”/g, ', ')
-    .replace(/â€“/g, ', ')
+    .replace(//g, ', ')
+    .replace(//g, ', ')
     .replace(/ - /g, ', ')
     .replace(/\.\.\./g, '. ')
     .replace(/[""]/g, '"')
@@ -1114,7 +1120,7 @@ export default function Profess() {
       };
     }
 
-    // â”€â”€ English voice assignment â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    //  English voice assignment 
     let voice = null;
     if (!inRole) {
       // Coach: Microsoft David at low pitch sounds older and more authoritative
@@ -1128,29 +1134,29 @@ export default function Profess() {
         case "examiner":
         case "lawyer":
         case "opponent":
-        // Formal authoritative/adversarial â€” deep, deliberate
+        // Formal authoritative/adversarial  deep, deliberate
         case "judge": case "examiner": case "prosecutor": case "cross_examiner":
         case "dean": case "regulator": case "official": case "commissioner":
         case "board_member": case "auditor": case "parent": case "grandparent":
         case "professor_academic": case "mentor": case "senior": case "calon_mertua":
         case "dosen_pembimbing": case "pak_rt":
           voice = byName("Microsoft David - English (United States)"); break;
-        // Formal female â€” professional UK
+        // Formal female  professional UK
         case "interviewer": case "journalist": case "critic": case "investigator":
         case "reviewer": case "panelist": case "manager": case "defense_lawyer":
           voice = byName("Google UK English Female"); break;
-        // Casual female â€” warm US
+        // Casual female  warm US
         case "friend_female": case "best_friend": case "crush": case "romantic_interest":
         case "date": case "blind_date": case "sibling": case "ex_partner":
           voice = byName("Google US English"); break;
-        // Casual male â€” relaxed Mark
+        // Casual male  relaxed Mark
         case "friend_male": case "colleague": case "stranger": case "new_acquaintance":
         case "neighbor": case "classmate": case "alumni": case "subordinate":
         case "mentee": case "junior": case "teman_ospek": case "anggota_tim_debat":
         case "senior_organisasi": case "host": case "guest": case "fellow_passenger":
         case "customer_service":
           voice = byName("Microsoft Mark - English (United States)"); break;
-        // Formal composed â€” UK Male
+        // Formal composed  UK Male
         case "negotiator": case "client": case "customer": case "ceo": case "executive":
         case "diplomat": case "investor": case "acquirer": case "partner": case "vendor":
         case "contractor": case "shareholder": case "voter": case "consumer":
@@ -1203,12 +1209,12 @@ export default function Profess() {
         // Audience
         case "voter": case "media_audience":
           rate = 1.05; pitch = 0.96; volume = 0.90; break;
-        // Relasi dekat â€” older
+        // Relasi dekat  older
         case "parent": case "grandparent": case "calon_mertua":
           rate = 0.98; pitch = 0.84; volume = 0.92; break;
         case "mentor": case "senior": case "pak_rt":
           rate = 0.98; pitch = 0.88; volume = 0.92; break;
-        // Relasi dekat â€” young/casual
+        // Relasi dekat  young/casual
         case "sibling": case "friend_male": case "best_friend":
           rate = 1.14; pitch = 0.98; volume = 0.90; break;
         case "friend_female": case "crush": case "romantic_interest":
@@ -1235,8 +1241,8 @@ export default function Profess() {
       }
     }
 
-    // Inner thought â€” Opsi C: pitch naik, volume turun, rate melambat
-    // Terasa seperti "suara dalam kepala" â€” masih suara karakter tapi ethereal
+    // Inner thought  Opsi C: pitch naik, volume turun, rate melambat
+    // Terasa seperti "suara dalam kepala"  masih suara karakter tapi ethereal
     if (isInnerThought) {
       rate   = Math.max(0.80, rate   - 0.12);
       volume = Math.max(0.38, volume - 0.34);
@@ -1327,7 +1333,7 @@ export default function Profess() {
     speakSegments(allSegments, role, mood, inRole);
   }, [speechEnabled, speakSegments]);
 
-  // Render markdown in text: bold, italic â€” returns array of spans
+  // Render markdown in text: bold, italic  returns array of spans
   const renderMarkdown = (text) => {
     if (!text) return null;
     const parts = [];
@@ -1462,7 +1468,7 @@ export default function Profess() {
       const charName = extractChar(text);
       const charTitle = extractTitle(text);
       const charGender = extractGender(text);
-      // Only switch to default if explicitly role:default â€” preserve current role during coaching
+      // Only switch to default if explicitly role:default  preserve current role during coaching
       const resolvedRole = (role === "default" && modeTag === "coaching" && currentRole !== "default")
         ? currentRole : role;
       changeRoleAndMood(resolvedRole, mood, modeTag, charName, charTitle, charGender);
@@ -1520,7 +1526,7 @@ export default function Profess() {
 
 
 
-  // â”€â”€â”€ SVG Icons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  SVG Icons 
   const IconVolume = () => (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
@@ -1579,7 +1585,7 @@ export default function Profess() {
     </svg>
   );
 
-  // â”€â”€â”€ Step indicator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  Step indicator 
   const ONBOARDING_STEPS = ["lang","mode","disclaimer","intensity","scenario"];
   const stepIndex = ONBOARDING_STEPS.indexOf(screen);
   const StepDots = () => stepIndex >= 0 ? (
@@ -1590,7 +1596,7 @@ export default function Profess() {
     </div>
   ) : null;
 
-  // â”€â”€â”€ Wordmark (clickable â†’ landing) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  Wordmark (clickable  landing) 
   const Wordmark = ({ size="17px" }) => (
     <button onClick={() => setScreen("landing")} style={{ background:"none", border:"none", padding:0, cursor:"pointer" }}>
       <span style={{ fontFamily:"'Playfair Display',serif", fontSize:size, fontWeight:500, letterSpacing:".06em", color:"#F0EDE6" }}>Profess</span>
@@ -1653,9 +1659,9 @@ export default function Profess() {
 
   const BASE = { minHeight:"100vh", background:"#080808", color:"#F0EDE6", fontFamily:"'Inter',sans-serif", fontWeight:300 };
 
-  // â”€â”€ LANDING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  LANDING 
   if (screen === "landing") {
-    const heroRoleDesc = r => ({ interviewer:"Formal â€” interviews & performance reviews", reviewer:"Formal â€” interviews & performance reviews", auditor:"Formal â€” interviews & performance reviews", examiner:"Formal â€” thesis defense & academic sessions", professor_academic:"Formal â€” thesis defense & academic sessions", dean:"Formal â€” thesis defense & academic sessions", journalist:"Formal â€” press conferences & media training", critic:"Formal â€” press conferences & media training", judge:"Formal â€” mock trials & debate adjudication", prosecutor:"Formal â€” mock trials & debate adjudication", cross_examiner:"Formal â€” mock trials & debate adjudication", friend_female:"Social â€” reconnecting & casual conversation", friend_male:"Social â€” reconnecting & casual conversation", best_friend:"Social â€” reconnecting & casual conversation", colleague:"Social â€” workplace dynamics & office talk", manager:"Social â€” workplace dynamics & office talk", subordinate:"Social â€” workplace dynamics & office talk", crush:"Social â€” romantic & flirtatious situations", romantic_interest:"Social â€” romantic & flirtatious situations", date:"Social â€” romantic & flirtatious situations", stranger:"Social â€” first impressions & small talk", new_acquaintance:"Social â€” first impressions & small talk", negotiator:"Formal â€” pitching, negotiation & boardroom", ceo:"Formal â€” pitching, negotiation & boardroom", executive:"Formal â€” pitching, negotiation & boardroom", acquirer:"Formal â€” pitching, negotiation & boardroom", parent:"Social â€” family conversations", grandparent:"Social â€” family conversations", calon_mertua:"Social â€” family conversations", mentor:"Formal â€” mentorship & guidance sessions", senior:"Formal â€” mentorship & guidance sessions" }[r] || "Available across all session types");
+    const heroRoleDesc = r => ({ interviewer:"Formal  interviews & performance reviews", reviewer:"Formal  interviews & performance reviews", auditor:"Formal  interviews & performance reviews", examiner:"Formal  thesis defense & academic sessions", professor_academic:"Formal  thesis defense & academic sessions", dean:"Formal  thesis defense & academic sessions", journalist:"Formal  press conferences & media training", critic:"Formal  press conferences & media training", judge:"Formal  mock trials & debate adjudication", prosecutor:"Formal  mock trials & debate adjudication", cross_examiner:"Formal  mock trials & debate adjudication", friend_female:"Social  reconnecting & casual conversation", friend_male:"Social  reconnecting & casual conversation", best_friend:"Social  reconnecting & casual conversation", colleague:"Social  workplace dynamics & office talk", manager:"Social  workplace dynamics & office talk", subordinate:"Social  workplace dynamics & office talk", crush:"Social  romantic & flirtatious situations", romantic_interest:"Social  romantic & flirtatious situations", date:"Social  romantic & flirtatious situations", stranger:"Social  first impressions & small talk", new_acquaintance:"Social  first impressions & small talk", negotiator:"Formal  pitching, negotiation & boardroom", ceo:"Formal  pitching, negotiation & boardroom", executive:"Formal  pitching, negotiation & boardroom", acquirer:"Formal  pitching, negotiation & boardroom", parent:"Social  family conversations", grandparent:"Social  family conversations", calon_mertua:"Social  family conversations", mentor:"Formal  mentorship & guidance sessions", senior:"Formal  mentorship & guidance sessions" }[r] || "Available across all session types");
     const { sofaLeft, sofaRight, beginPanel, aboutPanel, termsPanel, heroRow } = landingChars.current;
     const livingRoomMale = buildSVG(sofaLeft, roomMood, false);
     const livingRoomFemale = buildSVG(sofaRight, roomMood, false);
@@ -1668,7 +1674,7 @@ export default function Profess() {
 
     const TERMS_SECTIONS = [
       { title:"Nature of the service", body:"Profess is a communication training tool. It is not a licensed therapist, career counselor, legal advisor, or qualified professional of any kind. All feedback generated during sessions is for practice purposes only and should not be treated as professional guidance." },
-      { title:"Simulated characters", body:"All characters that appear in Profess sessions â€” interviewers, examiners, judges, friends, colleagues â€” are AI simulations. Their responses do not represent the actual standards, judgments, behavior, or views of any real institution, profession, or individual." },
+      { title:"Simulated characters", body:"All characters that appear in Profess sessions  interviewers, examiners, judges, friends, colleagues  are AI simulations. Their responses do not represent the actual standards, judgments, behavior, or views of any real institution, profession, or individual." },
       { title:"No professional advice", body:"Profess may make errors in reasoning, miss important nuances, or reflect biases present in its training data. Do not rely on Profess as the sole basis for any real-world professional, academic, legal, or personal decision." },
       { title:"User conduct", body:"Profess will not engage with requests to portray religious figures, convicted criminals, terrorists, historical dictators, or real public figures in roleplay. Sessions involving abusive, offensive, or sexually explicit content will be paused." },
       { title:"Data and privacy", body:"Conversation content is processed to generate AI responses and is not stored beyond the active session. No personally identifiable information is retained after the session ends." },
@@ -1683,7 +1689,7 @@ export default function Profess() {
         {/* Warm mode ambient overlay */}
         <div style={{ position:"fixed", inset:0, pointerEvents:"none", zIndex:998, background:"radial-gradient(ellipse at 65% 40%, rgba(180,100,20,0.12) 0%, rgba(140,70,10,0.06) 50%, transparent 80%)", opacity:warmMode?1:0, transition:"opacity 1.5s ease" }}/>
 
-        {/* â”€â”€ HERO â€” full viewport height â”€â”€ */}
+        {/*  HERO  full viewport height  */}
         <div style={{ position:"relative", height:"100vh", display:"flex", flexDirection:"column", overflow:"hidden", paddingBottom:"0" }}>
           {/* Nav */}
           <nav style={{ position:"absolute", top:0, left:0, right:0, padding:"24px 40px", display:"flex", alignItems:"center", zIndex:10 }}>
@@ -1707,39 +1713,39 @@ export default function Profess() {
               <line x1="0" y1="75" x2="100" y2="75" stroke="#2A2010" strokeWidth="0.3" opacity="0.7"/>
               {/* Rug */}
               <ellipse cx="50" cy="75.5" rx="35" ry="4" fill="#2A1A0A" opacity="0.4"/>
-              {/* Left sofa â€” backrest */}
+              {/* Left sofa  backrest */}
               <rect x="5" y="52" width="36" height="22" rx="3" fill="#3A2416" stroke="#4A3020" strokeWidth="1.5"/>
-              {/* Left sofa â€” body */}
+              {/* Left sofa  body */}
               <rect x="5" y="60" width="36" height="15" rx="2" fill="#2E1C10"/>
-              {/* Left sofa â€” armrests */}
+              {/* Left sofa  armrests */}
               <rect x="4" y="60" width="4.5" height="12" rx="2" fill="#4A3020"/>
               <rect x="37.5" y="60" width="4.5" height="12" rx="2" fill="#4A3020"/>
-              {/* Left sofa â€” cushion hint */}
+              {/* Left sofa  cushion hint */}
               <rect x="9" y="60.5" width="16" height="14" rx="1.5" fill="#3E2818" opacity="0.8"/>
               <rect x="27" y="60.5" width="13" height="14" rx="1.5" fill="#3E2818" opacity="0.8"/>
               {/* Left character */}
               <foreignObject x="10" y="32" width="20" height="30" overflow="visible" opacity={warmMode ? 0.75 : 0.45}>
                 <div xmlns="http://www.w3.org/1999/xhtml" style={{ width:"100%", height:"100%", animation:"friendBob 3.2s ease-in-out infinite" }} dangerouslySetInnerHTML={{ __html: livingRoomMale }}/>
               </foreignObject>
-              {/* Right sofa â€” backrest */}
+              {/* Right sofa  backrest */}
               <rect x="59" y="54" width="30" height="20" rx="3" fill="#2E1C0E" stroke="#3A2418" strokeWidth="1.5"/>
-              {/* Right sofa â€” body */}
+              {/* Right sofa  body */}
               <rect x="59" y="61" width="30" height="14" rx="2" fill="#261608"/>
-              {/* Right sofa â€” armrests */}
+              {/* Right sofa  armrests */}
               <rect x="57.5" y="61" width="4" height="11" rx="2" fill="#3A2418"/>
               <rect x="86" y="61" width="4" height="11" rx="2" fill="#3A2418"/>
-              {/* Right sofa â€” cushion hint */}
+              {/* Right sofa  cushion hint */}
               <rect x="63" y="61.5" width="13" height="13" rx="1.5" fill="#3A2418" opacity="0.7"/>
               <rect x="78" y="61.5" width="10" height="13" rx="1.5" fill="#3A2418" opacity="0.7"/>
               {/* Right character */}
               <foreignObject x="62" y="34" width="18" height="28" overflow="visible" opacity={warmMode ? 0.75 : 0.45}>
                 <div xmlns="http://www.w3.org/1999/xhtml" style={{ width:"100%", height:"100%", animation:"friendBob 2.8s ease-in-out infinite", animationDelay:"0.4s" }} dangerouslySetInnerHTML={{ __html: livingRoomFemale }}/>
               </foreignObject>
-              {/* Coffee table â€” top */}
+              {/* Coffee table  top */}
               <rect x="38" y="68" width="24" height="7" rx="1.5" fill="#4A3018" stroke="#5A3E20" strokeWidth="1.5"/>
-              {/* Coffee table â€” lighter top surface */}
+              {/* Coffee table  lighter top surface */}
               <rect x="38.5" y="68" width="23" height="3.5" rx="1" fill="#5A3E20" opacity="0.5"/>
-              {/* Coffee table â€” legs */}
+              {/* Coffee table  legs */}
               <rect x="39.5" y="75" width="2.5" height="4" rx="0.5" fill="#3A2410"/>
               <rect x="44" y="75" width="2.5" height="4" rx="0.5" fill="#3A2410"/>
               <rect x="54" y="75" width="2.5" height="4" rx="0.5" fill="#3A2410"/>
@@ -1769,7 +1775,7 @@ export default function Profess() {
               {/* Lamp foot */}
               <rect x="45.5" y="67.5" width="9" height="1.5" rx="0.5" fill="#2A1808"/>
             </svg>
-            {/* Lamp click area â€” separate from pointer-events:none wrapper */}
+            {/* Lamp click area  separate from pointer-events:none wrapper */}
           </div>
           {/* Lamp hint text */}
           <div style={{ position:"absolute", right:"28%", top:"42%", pointerEvents:"none", zIndex:6, textAlign:"center", transition:"color 1.2s ease" }}>
@@ -1802,7 +1808,7 @@ export default function Profess() {
               </div>
               <div style={{ width:"100px", height:"1px", background:"#D4B47C" }}/>
               <p style={{ fontSize:"15px", lineHeight:1.8, color:"#C8A458", maxWidth:"480px" }}>
-                A communication coach that responds as your audience would â€” and tells you exactly what went wrong.
+                A communication coach that responds as your audience would  and tells you exactly what went wrong.
               </p>
               <div>
                 <button onClick={() => setScreen("lang")}
@@ -1817,7 +1823,7 @@ export default function Profess() {
 
         </div>
 
-        {/* Character row â€” between hero and panels */}
+        {/* Character row  between hero and panels */}
         <div style={{ display:"flex", justifyContent:"center", alignItems:"flex-end", gap:"48px", padding:"48px 0 32px", background:"transparent", position:"relative", zIndex:2 }}>
           {heroRow.map((charObj, i) => {
             const role = ["interviewer","colleague","friend_female","negotiator"][i];
@@ -1837,11 +1843,11 @@ export default function Profess() {
           })}
         </div>
 
-        {/* â”€â”€ THREE-PANEL SECTION â”€â”€ */}
+        {/*  THREE-PANEL SECTION  */}
         <div style={{ position:"relative", background:"#060606", backgroundImage:"radial-gradient(circle, #1C1C1C 1px, transparent 1px)", backgroundSize:"24px 24px", borderTop:"1px solid #141414" }}>
           {/* Panels row */}
           <div style={{ display:"flex", borderBottom:"1px solid #141414" }}>
-            {/* PANEL 1 â€” BEGIN */}
+            {/* PANEL 1  BEGIN */}
             <button onClick={() => setScreen("lang")}
               style={{ flex:"1 1 0", minHeight:"420px", background:"#0A0A0A", border:"none", borderRight:"1px solid #141414", borderTop:expandedPanel==="begin"?"2px solid #C8A870":"2px solid transparent", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"0", cursor:"pointer", padding:"40px 24px", transition:"background .25s, border-color .25s", position:"relative", overflow:"hidden" }}
               onMouseEnter={e=>{ e.currentTarget.style.background="#0E0E0E"; e.currentTarget.style.borderTopColor="#C8A870"; e.currentTarget.querySelector('.panel-char').style.opacity="1"; }}
@@ -1857,7 +1863,7 @@ export default function Profess() {
               </div>
             </button>
 
-            {/* PANEL 2 â€” ABOUT */}
+            {/* PANEL 2  ABOUT */}
             <button onClick={() => setExpandedPanel(p => p==="about" ? null : "about")}
               style={{ flex:"1 1 0", minHeight:"420px", background:expandedPanel==="about"?"#0C0C0A":"#0A0A0A", border:"none", borderRight:"1px solid #141414", borderTop:expandedPanel==="about"?"2px solid #C8A870":"2px solid transparent", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"0", cursor:"pointer", padding:"40px 24px", transition:"background .25s, border-color .25s", position:"relative", overflow:"hidden" }}
               onMouseEnter={e=>{ e.currentTarget.style.background="#0E0E0E"; e.currentTarget.style.borderTopColor="#C8A870"; e.currentTarget.querySelector('.panel-char').style.opacity="1"; }}
@@ -1873,7 +1879,7 @@ export default function Profess() {
               </div>
             </button>
 
-            {/* PANEL 3 â€” TERMS */}
+            {/* PANEL 3  TERMS */}
             <button onClick={() => setExpandedPanel(p => p==="terms" ? null : "terms")}
               style={{ flex:"1 1 0", minHeight:"420px", background:expandedPanel==="terms"?"#0C0C0A":"#0A0A0A", border:"none", borderTop:expandedPanel==="terms"?"2px solid #C8A870":"2px solid transparent", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"0", cursor:"pointer", padding:"40px 24px", transition:"background .25s, border-color .25s", position:"relative", overflow:"hidden" }}
               onMouseEnter={e=>{ e.currentTarget.style.background="#0E0E0E"; e.currentTarget.style.borderTopColor="#C8A870"; e.currentTarget.querySelector('.panel-char').style.opacity="1"; }}
@@ -1904,10 +1910,10 @@ export default function Profess() {
             <div style={{ borderBottom:"1px solid #141414", padding:"48px 40px" }}>
               <div style={{ maxWidth:"680px", margin:"0 auto", display:"flex", flexDirection:"column", gap:"24px" }}>
                 <p style={{ fontSize:"15px", lineHeight:1.9, color:"#D8D5CE" }}>
-                  Profess is built on a single principle: you cannot prepare for a conversation without experiencing the other person's perspective. Most practice tools give you a passive audience. Profess gives you an active one â€” a character that pushes back, reacts, and responds the way your real audience will. The coaching comes after the exchange, not during it.
+                  Profess is built on a single principle: you cannot prepare for a conversation without experiencing the other person's perspective. Most practice tools give you a passive audience. Profess gives you an active one  a character that pushes back, reacts, and responds the way your real audience will. The coaching comes after the exchange, not during it.
                 </p>
                 <p style={{ fontSize:"15px", lineHeight:1.9, color:"#C8A458" }}>
-                  Profess was built by Jethro Amaga as a communication training tool for anyone who wants to grow â€” not just perform.
+                  Profess was built by Jethro Amaga as a communication training tool for anyone who wants to grow  not just perform.
                 </p>
               </div>
             </div>
@@ -1929,7 +1935,7 @@ export default function Profess() {
 
           {/* Footer */}
           <div style={{ padding:"32px 40px", textAlign:"center" }}>
-            <p style={{ fontSize:"11px", color:"#1E1E1E", letterSpacing:".08em" }}>Profess â€” You cannot move people you do not understand.</p>
+            <p style={{ fontSize:"11px", color:"#1E1E1E", letterSpacing:".08em" }}>Profess  You cannot move people you do not understand.</p>
           </div>
         </div>
 
@@ -1942,13 +1948,13 @@ export default function Profess() {
     );
   }
 
-  // â”€â”€ LANGUAGE SELECTION â€” full-screen split â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  LANGUAGE SELECTION  full-screen split 
   if (screen === "lang") return (
     <div className="screen-enter" style={{ ...BASE, display:"flex", height:"100vh", overflow:"hidden", position:"relative" }}>
       <style>{css}</style>
       <div className="grain-layer"/>
       {/* Back to landing */}
-      <div style={{ position:"fixed", top:"24px", left:"40px", zIndex:50 }}>
+      <div style={{ position:"fixed", top:"24px", right:"40px", zIndex:50 }}>
         <button onClick={() => setScreen("landing")} style={{ background:"none", border:"none", color:"#C8A458", fontSize:"10px", letterSpacing:".1em", textTransform:"uppercase", display:"flex", alignItems:"center", gap:"5px", transition:"color .2s", padding:0, cursor:"pointer" }}
           onMouseEnter={e=>e.currentTarget.style.color="#D8C178"} onMouseLeave={e=>e.currentTarget.style.color="#C8A458"}>
           <IconArrowLeft/> Landing
@@ -1986,13 +1992,13 @@ export default function Profess() {
     </div>
   );
 
-  // â”€â”€ MODE SELECTION â€” full-screen split â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  MODE SELECTION  full-screen split 
   if (screen === "mode") return (
     <div className="screen-enter" style={{ ...BASE, display:"flex", height:"100vh", overflow:"hidden", position:"relative" }}>
       <style>{css}</style>
       <div className="grain-layer"/>
       {/* Back + steps */}
-      <div style={{ position:"fixed", top:"24px", left:"40px", zIndex:50 }}>
+      <div style={{ position:"fixed", top:"24px", right:"40px", zIndex:50 }}>
         <button onClick={() => setScreen("lang")} style={{ background:"none", border:"none", color:"#C8A458", fontSize:"10px", letterSpacing:".1em", textTransform:"uppercase", display:"flex", alignItems:"center", gap:"5px", transition:"color .2s", padding:0, cursor:"pointer" }}
           onMouseEnter={e=>e.currentTarget.style.color="#D8C178"} onMouseLeave={e=>e.currentTarget.style.color="#C8A458"}>
           <IconArrowLeft/> {lang==="id"?"Bahasa":"Language"}
@@ -2025,19 +2031,19 @@ export default function Profess() {
     </div>
   );
 
-  // â”€â”€ DISCLAIMER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  DISCLAIMER 
   if (screen === "disclaimer") {
     const isFormal = pendingMode === "formal";
     const isID = lang === "id";
     const accent = isFormal ? "#C8A870" : "#C47A8A";
     const disclaimerContent = {
       en: {
-        formal:  { title:"Before we begin", body:["Profess is a communication training tool, not a qualified professional.","The characters in this session â€” interviewers, examiners, judges, journalists â€” are simulations. Their responses do not represent the actual standards, procedures, or judgments of any real institution, profession, or individual.","Feedback provided by Profess is for practice purposes only. It cannot replace the assessment of a real interviewer, academic examiner, legal authority, or any other professional. Profess may make errors in reasoning, miss important nuances, or reflect biases in its training.","Do not use Profess as a basis for actual professional decisions."], cta:"I understand â€” begin session" },
-        social:  { title:"Before we begin", body:["Profess is a communication training tool, not a social scientist or therapist.","The characters and scenarios in this session are simplified simulations for training purposes. They do not accurately represent any real person, cultural group, or social dynamic.","Profess may make errors, oversimplify complex interpersonal situations, or reflect cultural biases. Real human interactions are far more nuanced than any simulation can capture.","Use this session as a starting point for reflection â€” not as a definitive guide to how people think or behave."], cta:"I understand â€” begin session" },
+        formal:  { title:"Before we begin", body:["Profess is a communication training tool, not a qualified professional.","The characters in this session  interviewers, examiners, judges, journalists  are simulations. Their responses do not represent the actual standards, procedures, or judgments of any real institution, profession, or individual.","Feedback provided by Profess is for practice purposes only. It cannot replace the assessment of a real interviewer, academic examiner, legal authority, or any other professional. Profess may make errors in reasoning, miss important nuances, or reflect biases in its training.","Do not use Profess as a basis for actual professional decisions."], cta:"I understand  begin session" },
+        social:  { title:"Before we begin", body:["Profess is a communication training tool, not a social scientist or therapist.","The characters and scenarios in this session are simplified simulations for training purposes. They do not accurately represent any real person, cultural group, or social dynamic.","Profess may make errors, oversimplify complex interpersonal situations, or reflect cultural biases. Real human interactions are far more nuanced than any simulation can capture.","Use this session as a starting point for reflection  not as a definitive guide to how people think or behave."], cta:"I understand  begin session" },
       },
       id: {
-        formal:  { title:"Sebelum kita mulai", body:["Profess adalah alat latihan komunikasi, bukan profesional yang berkualifikasi.","Karakter dalam sesi ini â€” pewawancara, penguji, hakim, jurnalis â€” adalah simulasi. Respons mereka tidak mencerminkan standar, prosedur, atau penilaian aktual dari institusi, profesi, atau individu nyata manapun.","Feedback dari Profess hanya untuk tujuan latihan. Profess tidak dapat menggantikan penilaian pewawancara sungguhan, penguji akademik, otoritas hukum, atau profesional lainnya. Profess dapat melakukan kesalahan dalam penalaran, melewatkan nuansa penting, atau mencerminkan bias dalam pelatihannya.","Jangan gunakan Profess sebagai dasar keputusan profesional yang sesungguhnya."], cta:"Saya mengerti â€” mulai sesi" },
-        social:  { title:"Sebelum kita mulai", body:["Profess adalah alat latihan komunikasi, bukan ilmuwan sosial atau terapis.","Karakter dan skenario dalam sesi ini adalah simulasi yang disederhanakan untuk tujuan latihan. Mereka tidak secara akurat mencerminkan individu nyata, kelompok budaya, atau dinamika sosial manapun.","Profess dapat melakukan kesalahan, menyederhanakan situasi interpersonal yang kompleks, atau mencerminkan bias budaya. Interaksi manusia yang sesungguhnya jauh lebih bernuansa dari yang dapat ditangkap simulasi manapun.","Gunakan sesi ini sebagai titik awal refleksi â€” bukan sebagai panduan definitif tentang cara orang berpikir atau berperilaku."], cta:"Saya mengerti â€” mulai sesi" },
+        formal:  { title:"Sebelum kita mulai", body:["Profess adalah alat latihan komunikasi, bukan profesional yang berkualifikasi.","Karakter dalam sesi ini  pewawancara, penguji, hakim, jurnalis  adalah simulasi. Respons mereka tidak mencerminkan standar, prosedur, atau penilaian aktual dari institusi, profesi, atau individu nyata manapun.","Feedback dari Profess hanya untuk tujuan latihan. Profess tidak dapat menggantikan penilaian pewawancara sungguhan, penguji akademik, otoritas hukum, atau profesional lainnya. Profess dapat melakukan kesalahan dalam penalaran, melewatkan nuansa penting, atau mencerminkan bias dalam pelatihannya.","Jangan gunakan Profess sebagai dasar keputusan profesional yang sesungguhnya."], cta:"Saya mengerti  mulai sesi" },
+        social:  { title:"Sebelum kita mulai", body:["Profess adalah alat latihan komunikasi, bukan ilmuwan sosial atau terapis.","Karakter dan skenario dalam sesi ini adalah simulasi yang disederhanakan untuk tujuan latihan. Mereka tidak secara akurat mencerminkan individu nyata, kelompok budaya, atau dinamika sosial manapun.","Profess dapat melakukan kesalahan, menyederhanakan situasi interpersonal yang kompleks, atau mencerminkan bias budaya. Interaksi manusia yang sesungguhnya jauh lebih bernuansa dari yang dapat ditangkap simulasi manapun.","Gunakan sesi ini sebagai titik awal refleksi  bukan sebagai panduan definitif tentang cara orang berpikir atau berperilaku."], cta:"Saya mengerti  mulai sesi" },
       }
     };
     const dc = disclaimerContent[isID?"id":"en"][isFormal?"formal":"social"];
@@ -2083,18 +2089,18 @@ export default function Profess() {
     );
   }
 
-  // â”€â”€ INTENSITY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  INTENSITY 
   if (screen === "intensity") {
     const isID = lang === "id";
     const isFormal = pendingMode === "formal";
     const levels = isID ? [
-      { key:"comfortable", bars:1, color:"#7A9A70", label:"Nyaman",      desc:"Supportif dan membangun â€” cocok untuk pemula atau mencoba skenario baru" },
-      { key:"challenging", bars:2, color:"#C8A870", label:"Menantang",   desc:"Ketat dan jujur â€” standar tinggi, feedback langsung tanpa basa-basi" },
-      { key:"no_mercy",   bars:3, color:"#BC5A5A", label:"Tanpa Ampun", desc:"Tekanan maksimal â€” untuk yang ingin diuji habis-habisan" },
+      { key:"comfortable", bars:1, color:"#7A9A70", label:"Nyaman",      desc:"Supportif dan membangun  cocok untuk pemula atau mencoba skenario baru" },
+      { key:"challenging", bars:2, color:"#C8A870", label:"Menantang",   desc:"Ketat dan jujur  standar tinggi, feedback langsung tanpa basa-basi" },
+      { key:"no_mercy",   bars:3, color:"#BC5A5A", label:"Tanpa Ampun", desc:"Tekanan maksimal  untuk yang ingin diuji habis-habisan" },
     ] : [
-      { key:"comfortable", bars:1, color:"#7A9A70", label:"Comfortable", desc:"Supportive and constructive â€” good for trying new scenarios or warming up" },
-      { key:"challenging", bars:2, color:"#C8A870", label:"Challenging",  desc:"Rigorous and honest â€” high standards, direct feedback, no softening" },
-      { key:"no_mercy",   bars:3, color:"#BC5A5A", label:"No Mercy",     desc:"Maximum pressure â€” for when you want to be pushed to your absolute limit" },
+      { key:"comfortable", bars:1, color:"#7A9A70", label:"Comfortable", desc:"Supportive and constructive  good for trying new scenarios or warming up" },
+      { key:"challenging", bars:2, color:"#C8A870", label:"Challenging",  desc:"Rigorous and honest  high standards, direct feedback, no softening" },
+      { key:"no_mercy",   bars:3, color:"#BC5A5A", label:"No Mercy",     desc:"Maximum pressure  for when you want to be pushed to your absolute limit" },
     ];
     const Bars = ({ count, color, hovered }) => (
       <div style={{ display:"flex", gap:"4px", alignItems:"flex-end", flexShrink:0, width:"28px", transition:"transform .2s", transform:hovered?"scale(1.1)":"scale(1)" }}>
@@ -2151,7 +2157,7 @@ export default function Profess() {
     );
   }
 
-  // â”€â”€ SCENARIO PICKER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  SCENARIO PICKER 
   if (screen === "scenario") {
     const isID = lang === "id";
     const isFormal = pendingMode === "formal";
@@ -2159,28 +2165,28 @@ export default function Profess() {
     const SCENARIOS = {
       formal: {
         id: [
-          { group:"Akademik", items:["Sidang Skripsi â€” Penguji yang Skeptis","Presentasi Seminar â€” Dosen yang Tidak Yakin","Debat Parlemen Asia â€” Mosi Kontroversial","Ospek Organisasi â€” Senior yang Menguji Mental"] },
-          { group:"Karir", items:["Interview Kerja Pertama â€” HRD yang Kritis","Pitching Startup ke Investor â€” 5 Menit untuk Meyakinkan","Negosiasi Gaji â€” Atasan yang Tidak Mudah","Press Conference â€” Jurnalis yang Agresif","Rapat dengan Klien â€” Keputusan di Tangan Mereka"] },
-          { group:"Hukum & Publik", items:["Persidangan Mock Trial â€” Jaksa yang Tidak Memberi Celah","Debat Publik â€” Lawan yang Lebih Berpengalaman","Audiensi dengan Pejabat â€” Birokrasi yang Tidak Berpihak"] },
+          { group:"Akademik", items:["Sidang Skripsi  Penguji yang Skeptis","Presentasi Seminar  Dosen yang Tidak Yakin","Debat Parlemen Asia  Mosi Kontroversial","Ospek Organisasi  Senior yang Menguji Mental"] },
+          { group:"Karir", items:["Interview Kerja Pertama  HRD yang Kritis","Pitching Startup ke Investor  5 Menit untuk Meyakinkan","Negosiasi Gaji  Atasan yang Tidak Mudah","Press Conference  Jurnalis yang Agresif","Rapat dengan Klien  Keputusan di Tangan Mereka"] },
+          { group:"Hukum & Publik", items:["Persidangan Mock Trial  Jaksa yang Tidak Memberi Celah","Debat Publik  Lawan yang Lebih Berpengalaman","Audiensi dengan Pejabat  Birokrasi yang Tidak Berpihak"] },
         ],
         en: [
-          { group:"Academic", items:["Thesis Defense â€” The Skeptical Examiner","Seminar Presentation â€” The Unconvinced Professor","Asian Parliamentary Debate â€” A Controversial Motion","Org Initiation â€” Senior Testing Your Limits"] },
-          { group:"Career", items:["First Job Interview â€” The Critical HRD","Startup Pitch â€” 5 Minutes to Convince an Investor","Salary Negotiation â€” A Manager Who Won't Budge","Press Conference â€” An Aggressive Journalist","Client Meeting â€” The Decision Is Theirs"] },
-          { group:"Legal & Public", items:["Mock Trial â€” A Prosecutor With No Mercy","Public Debate â€” An Opponent More Experienced Than You","Government Audience â€” Bureaucracy That Isn't On Your Side"] },
+          { group:"Academic", items:["Thesis Defense  The Skeptical Examiner","Seminar Presentation  The Unconvinced Professor","Asian Parliamentary Debate  A Controversial Motion","Org Initiation  Senior Testing Your Limits"] },
+          { group:"Career", items:["First Job Interview  The Critical HRD","Startup Pitch  5 Minutes to Convince an Investor","Salary Negotiation  A Manager Who Won't Budge","Press Conference  An Aggressive Journalist","Client Meeting  The Decision Is Theirs"] },
+          { group:"Legal & Public", items:["Mock Trial  A Prosecutor With No Mercy","Public Debate  An Opponent More Experienced Than You","Government Audience  Bureaucracy That Isn't On Your Side"] },
         ],
       },
       social: {
         id: [
-          { group:"Relasi", items:["Reuni Teman Lama â€” Ada yang Belum Selesai","Ketemu Crush â€” Kesempatan yang Tidak Bisa Diulang","Kenalan Baru di Acara â€” Tidak Ada yang Dikenal","Minta Maaf ke Teman â€” Sudah Terlalu Lama Didiamkan","Konfrontasi Teman â€” Sebelum Hubungan Ini Berakhir"] },
-          { group:"Keluarga", items:["Bicara Jujur ke Orang Tua â€” Tentang Masa Depan","Ketemu Calon Mertua â€” Pertama Kali","Adik yang Tidak Mau Diatur â€” Tapi Kamu Peduli"] },
-          { group:"Profesional Casual", items:["Ngobrol dengan Senior di Kantor â€” Yang Kamu Kagumi","Mengkritik Atasan dengan Sopan â€” Tanpa Kehilangan Posisi","Networking di Acara â€” Mulai dari Nol"] },
-          { group:"Situasional", items:["Kenalan di Bookstore â€” Buku yang Sama","Perjalanan Panjang â€” Teman Duduk yang Menarik","Golf dengan Pengusaha Senior â€” Empat Jam untuk Berkesan"] },
+          { group:"Relasi", items:["Reuni Teman Lama  Ada yang Belum Selesai","Ketemu Crush  Kesempatan yang Tidak Bisa Diulang","Kenalan Baru di Acara  Tidak Ada yang Dikenal","Minta Maaf ke Teman  Sudah Terlalu Lama Didiamkan","Konfrontasi Teman  Sebelum Hubungan Ini Berakhir"] },
+          { group:"Keluarga", items:["Bicara Jujur ke Orang Tua  Tentang Masa Depan","Ketemu Calon Mertua  Pertama Kali","Adik yang Tidak Mau Diatur  Tapi Kamu Peduli"] },
+          { group:"Profesional Casual", items:["Ngobrol dengan Senior di Kantor  Yang Kamu Kagumi","Mengkritik Atasan dengan Sopan  Tanpa Kehilangan Posisi","Networking di Acara  Mulai dari Nol"] },
+          { group:"Situasional", items:["Kenalan di Bookstore  Buku yang Sama","Perjalanan Panjang  Teman Duduk yang Menarik","Golf dengan Pengusaha Senior  Empat Jam untuk Berkesan"] },
         ],
         en: [
-          { group:"Relationships", items:["Reconnecting with an Old Friend â€” Something Was Left Unsaid","Meeting Your Crush â€” A Chance You Can't Repeat","New People at an Event â€” You Don't Know Anyone","Apologizing to a Friend â€” You've Waited Too Long","Confronting a Friend â€” Before This Ends"] },
-          { group:"Family", items:["Honest Talk with Parents â€” About Your Future","Meeting the Parents â€” First Time","A Sibling Who Won't Listen â€” But You Care"] },
-          { group:"Professional Casual", items:["Talking to a Senior You Admire â€” At the Office","Giving Feedback to Your Boss â€” Without Losing Ground","Networking at an Event â€” Starting From Zero"] },
-          { group:"Situational", items:["Bookstore Encounter â€” The Same Book","Long Journey â€” An Interesting Seatmate","Golf with a Senior Executive â€” Four Hours to Make an Impression"] },
+          { group:"Relationships", items:["Reconnecting with an Old Friend  Something Was Left Unsaid","Meeting Your Crush  A Chance You Can't Repeat","New People at an Event  You Don't Know Anyone","Apologizing to a Friend  You've Waited Too Long","Confronting a Friend  Before This Ends"] },
+          { group:"Family", items:["Honest Talk with Parents  About Your Future","Meeting the Parents  First Time","A Sibling Who Won't Listen  But You Care"] },
+          { group:"Professional Casual", items:["Talking to a Senior You Admire  At the Office","Giving Feedback to Your Boss  Without Losing Ground","Networking at an Event  Starting From Zero"] },
+          { group:"Situational", items:["Bookstore Encounter  The Same Book","Long Journey  An Interesting Seatmate","Golf with a Senior Executive  Four Hours to Make an Impression"] },
         ],
       },
     };
@@ -2216,7 +2222,7 @@ export default function Profess() {
                 style={{ width:"100%", background:"none", border:`1px solid ${accent}25`, color:accent, fontFamily:"inherit", fontSize:"13px", padding:"20px 24px", textAlign:"left", letterSpacing:".04em", transition:"border-color .2s, background .2s", cursor:"pointer" }}
                 onMouseEnter={e=>{ e.currentTarget.style.borderColor=accent; e.currentTarget.style.background=`${accent}08`; }}
                 onMouseLeave={e=>{ e.currentTarget.style.borderColor=`${accent}25`; e.currentTarget.style.background="none"; }}>
-                + {isID?"Mulai bebas â€” saya punya skenario sendiri":"Start free â€” I have my own scenario"}
+                + {isID?"Mulai bebas  saya punya skenario sendiri":"Start free  I have my own scenario"}
               </button>
             </div>
 
@@ -2252,7 +2258,7 @@ export default function Profess() {
     );
   }
 
-  // â”€â”€ SUMMARY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  SUMMARY 
   if (screen === "summary") {
     const isID = lang === "id";
     const isFormal = sessionMode === "formal";
@@ -2274,7 +2280,7 @@ export default function Profess() {
             </h2>
             <div style={{ borderTop:"1px solid #141414", marginBottom:"40px" }}>
               {summaryLines.map((line, i) => {
-                const clean = line.replace(/^[-â€¢]\s*/, "").trim();
+                const clean = line.replace(/^[-]\s*/, "").trim();
                 if (!clean) return null;
                 return (
                   <div key={i} style={{ display:"flex", gap:"20px", padding:"20px 0", borderBottom:"1px solid #0E0E0E", alignItems:"flex-start" }}>
@@ -2308,7 +2314,7 @@ export default function Profess() {
     );
   }
 
-  // â”€â”€ SESSION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  //  SESSION 
   const isFormalSession = sessionMode === "formal";
   const sessionAccent = isFormalSession ? "#C8A870" : "#C47A8A";
 
@@ -2401,7 +2407,7 @@ export default function Profess() {
           style={{ background:"none", border:"none", color:"#C8A458", fontFamily:"inherit", fontSize:"10px", letterSpacing:".06em", padding:0, textAlign:"left", cursor:"pointer", animation:"musicFadeIn .4s ease forwards", transition:"color .2s" }}
           onMouseEnter={e => e.currentTarget.style.color="#D8C178"}
           onMouseLeave={e => e.currentTarget.style.color="#C8A458"}>
-          â–¸ Play music for this session
+           Play music for this session
         </button>
       )}
       {micError && <p style={{ fontSize:"10px", color:"#BC5A5A", textAlign:"center" }}>{micError}</p>}
@@ -2438,7 +2444,7 @@ export default function Profess() {
             {[0,.08,.16,.24,.32].map((d,i)=><div key={i} style={{ width:"2px", height:`${5+i*3}px`, background:"#7A4040", borderRadius:"1px", animation:`waveBar .5s ease-in-out ${d}s infinite` }}/>)}
           </div>
           <span style={{ fontSize:"9px", color:"#5A3030", letterSpacing:".1em", textTransform:"uppercase" }}>
-            {lang==="id"?"Merekam â€” jeda untuk kirim":"Recording â€” pause to send"}
+            {lang==="id"?"Merekam  jeda untuk kirim":"Recording  pause to send"}
           </span>
         </div>
       )}
@@ -2560,7 +2566,7 @@ export default function Profess() {
         </div>
       ) : (
         <div style={{ flex:1, display:"flex", overflow:"hidden" }}>
-          {/* Desktop sidebar â€” 240px */}
+          {/* Desktop sidebar  240px */}
           <div style={{ width:"240px", flexShrink:0, borderRight:"1px solid #141414", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"flex-start", background:isTransitioning?"#080808":`radial-gradient(ellipse at 50% 40%, ${charMeta.bg} 0%, #080808 75%)`, transition:"background .5s ease", position:"fixed", top:"56px", left:0, height:"calc(100vh - 56px)", overflow:"hidden", zIndex:10 }}>
             <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:"16px", padding:"32px 16px 24px", width:"100%" }}>
               {charAnimBlock("200px")}
@@ -2597,7 +2603,7 @@ export default function Profess() {
           </div>
         </div>
       )}
-      {/* Music widget â€” persists across all screens */}
+      {/* Music widget  persists across all screens */}
       {showPlayer && <MusicWidget activePlaylist={activePlaylist} setActivePlaylist={setActivePlaylist} onClose={() => setShowPlayer(false)}/>}
     </div>
   );
@@ -2609,13 +2615,13 @@ function MusicWidget({ activePlaylist, setActivePlaylist, onClose }) {
       {/* Header */}
       <div style={{ padding:"8px 12px", borderBottom:"1px solid #141414", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
         <span style={{ fontSize:"9px", letterSpacing:".12em", textTransform:"uppercase", color:"#C8A458" }}>Now Playing</span>
-        <button onClick={onClose} style={{ background:"none", border:"none", color:"#C8A458", fontSize:"16px", lineHeight:1, cursor:"pointer", padding:0 }}>Ã—</button>
+        <button onClick={onClose} style={{ background:"none", border:"none", color:"#C8A458", fontSize:"16px", lineHeight:1, cursor:"pointer", padding:0 }}></button>
       </div>
       {/* Playlist selector */}
       <div style={{ padding:"6px 12px", display:"flex", gap:"6px" }}>
         {PLAYLISTS.map((pl, i) => (
           <button key={i} onClick={() => setActivePlaylist(i)}
-            style={{ padding:"3px 8px", border:`1px solid ${activePlaylist===i?"#C8A870":"#1E1E1E"}`, color:activePlaylist===i?"#C8A870":"#4A4540", fontFamily:"'Inter',sans-serif", fontWeight:300, fontSize:"9px", letterSpacing:".06em", background:"none", cursor:"pointer", transition:"border-color .2s, color .2s" }}>
+            style={{ padding:"3px 8px", border:`1px solid ${activePlaylist===i?"#C8A870":"#1E1E1E"}`, color:activePlaylist===i?"#C8A870":"#C8A458", fontFamily:"'Inter',sans-serif", fontWeight:300, fontSize:"9px", letterSpacing:".06em", background:"none", cursor:"pointer", transition:"border-color .2s, color .2s" }}>
             {pl.label}
           </button>
         ))}
