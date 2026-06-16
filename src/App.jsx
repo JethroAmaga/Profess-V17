@@ -1892,7 +1892,7 @@ export default function Profess() {
               </div>
               <div style={{ width:"100px", height:"1px", background:"#D4B47C" }}/>
               <p style={{ fontSize:"15px", lineHeight:1.8, color:"#C8A458", maxWidth:"480px" }}>
-                A communication coach that responds as your audience would — and tells you exactly what went wrong.
+                Explore how your ideas, decisions, and messages may be received before the real conversation begins.
               </p>
               <div>
                 <button className="hero-begin-btn" onClick={() => setScreen("lang")}
