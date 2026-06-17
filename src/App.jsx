@@ -2782,11 +2782,11 @@ export default function Profess() {
       {isMobile ? (
         <div style={{ flex:1, display:"flex", flexDirection:"column", overflow:"hidden" }}>
           {/* Mobile character strip */}
-          <div style={{ background:isTransitioning?"#080808":charMeta.bg, transition:"background .4s ease", borderBottom:"1px solid #141414", padding:"10px 16px", display:"flex", alignItems:"center", gap:"14px", flexShrink:0 }}>
-            {charAnimBlock("62px")}
+          <div style={{ background:isTransitioning?"#080808":charMeta.bg, transition:"background .4s ease", borderBottom:"1px solid #141414", padding:"12px 16px", display:"flex", alignItems:"center", gap:"14px", flexShrink:0 }}>
+            {charAnimBlock("78px")}
             <div style={{ flex:1, minWidth:0 }}>
-              <div style={{ fontFamily:"'Playfair Display',serif", fontSize:"14px", color:charMeta.accent, marginBottom:"2px" }}>{charMeta.name}</div>
-              <div style={{ fontSize:"9px", color:"#C8A458", letterSpacing:".1em", textTransform:"uppercase" }}>{charMeta.title}</div>
+              <div style={{ fontFamily:"'Playfair Display',serif", fontSize:"16px", color:charMeta.accent, marginBottom:"2px" }}>{charMeta.name}</div>
+              <div style={{ fontSize:"10px", color:"#C8A458", letterSpacing:".1em", textTransform:"uppercase" }}>{charMeta.title}</div>
               {currentMood !== "neutral" && (
                 <div style={{ marginTop:"5px", display:"inline-flex", alignItems:"center", gap:"5px" }}>
                   <div style={{ width:"4px", height:"4px", borderRadius:"50%", background:charMeta.accent }}/>
