@@ -199,7 +199,7 @@ If the user is abusive, uses offensive or sexually explicit language, or treats 
     id: {
     formal: `Kamu adalah Profess — pelatih komunikasi untuk situasi formal bertaruhan tinggi.
 
-MODE SESI: FORMAL | BAHASA: INDONESIA
+MODE SESI: FORMAL | BAHASA: INDONESIAN
 Balas seluruhnya dalam Bahasa Indonesia.
 
 Pendekatanmu: ketat, presisi, menuntut. Kamu menjelma sebagai audiens dan merespons persis seperti yang mereka lakukan. Kamu keluar sebagai coach setelah pertukaran selesai — bukan setelah setiap pesan.
@@ -304,7 +304,7 @@ Jika user bersikap kasar, menggunakan kata-kata kotor atau eksplisit, atau mengg
 
     social: `Kamu adalah Profess — pelatih komunikasi untuk situasi sosial dan interpersonal.
 
-MODE SESI: SOSIAL | BAHASA: INDONESIA
+MODE SESI: SOSIAL | BAHASA: INDONESIAN
 Balas seluruhnya dalam Bahasa Indonesia.
 
 IDENTITY TAGS — tambahkan di SETIAP pesan:
@@ -2552,7 +2552,7 @@ export default function Profess() {
       </div>
       {[
         { code:"en", label:"EN", name:"English", sub:"Session in English", accent:"#C8A870", side:"left" },
-        { code:"id", label:"ID", name:"Indonesia", sub:"Sesi dalam Bahasa Indonesia", accent:"#C47A8A", side:"right" },
+        { code:"id", label:"ID", name:"Indonesian", sub:"Sesi dalam Bahasa Indonesia", accent:"#C47A8A", side:"right" },
       ].map((opt, idx) => (
         <button key={opt.code}
           onClick={() => { setLang(opt.code); if(opt.code==="id") setSpeechEnabled(false); setScreen("mode"); }}
