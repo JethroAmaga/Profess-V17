@@ -630,7 +630,6 @@ function buildSVG(charOrKey, mood, isTalking, scene = "role") {
   <rect x="46" y="46" width="68" height="22" fill="${h}"/>
   <ellipse cx="50" cy="82" rx="12" ry="26" fill="${h}"/>
   <ellipse cx="110" cy="82" rx="12" ry="26" fill="${h}"/>
-  <ellipse cx="80" cy="118" rx="28" ry="10" fill="${h}" opacity=".55"/>
 `,
     bun: `<ellipse cx="80" cy="46" rx="33" ry="19" fill="${h}"/>
        <rect x="47" y="46" width="66" height="21" fill="${h}"/>
@@ -666,17 +665,24 @@ function buildSVG(charOrKey, mood, isTalking, scene = "role") {
 `,
     curtain_long: `
   <ellipse cx="80" cy="45" rx="34" ry="18" fill="${h}"/>
-  <rect x="46" y="45" width="68" height="20" fill="${h}"/>
+  <rect x="46" y="45" width="68" height="18" fill="${h}"/>
 
-  <ellipse cx="64" cy="78" rx="10" ry="26" fill="${h}"/>
-  <ellipse cx="96" cy="78" rx="10" ry="26" fill="${h}"/>
-
+  <!-- Left fringe -->
   <path
-    d="M74 36
-       Q80 42 86 36
-       Q80 32 74 36 Z"
-    fill="${hairDark}"
-    opacity="0.35"
+    d="M68 44
+       Q62 52 66 64
+       Q68 68 72 66
+       Q70 58 74 46 Z"
+    fill="${h}"
+  />
+
+  <!-- Right fringe -->
+  <path
+    d="M92 44
+       Q98 52 94 64
+       Q92 68 88 66
+       Q90 58 86 46 Z"
+    fill="${h}"
   />
 `,
     bob: `<ellipse cx="80" cy="46" rx="34" ry="19" fill="${h}"/>
