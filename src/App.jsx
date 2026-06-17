@@ -1960,7 +1960,7 @@ export default function Profess() {
             <rect x="44" y="75" width="2.5" height="4" rx="0.5" fill="#251808"/>
             <rect x="54" y="75" width="2.5" height="4" rx="0.5" fill="#251808"/>
             <rect x="58" y="75" width="2.5" height="4" rx="0.5" fill="#251808"/>
-            <text x="50" y="40" textAnchor="middle" fill="#C8B090" fontSize="2.2" opacity="0.8" letterSpacing="0.4" > {lang==="id" ? "TAP LAMPU" : "TAP LAMP"} </text>
+            <text x="50" y="40" textAnchor="middle" fill="#C8B090" fontSize="2.2" opacity="0.8" letterSpacing="0.4" > {lang==="id" ? "CLICK THE LAMP" : "CLICK THE LAMP"} </text>
             {warmMode && <circle cx="50" cy="50" r="20" fill="url(#lampGlowMobile)" opacity="0.7"/>}
             <g onClick={() => { setWarmMode(w => { const next = !w; setRoomMood(next ? "warm" : "neutral"); return next; }); }} style={{ cursor:"pointer" }}>
               <polygon points="44,59 56,59 53.5,51 46.5,51" fill={warmMode ? "#D4A020" : "#2A1A08"} stroke="#4A3020" strokeWidth="0.3"/>
@@ -1969,7 +1969,7 @@ export default function Profess() {
               <rect x="38" y="48" width="24" height="24" fill="transparent"/>
             </g>
             {/* Radio — same relative position/scale as desktop */}
-            <text x="85.5" y="55" textAnchor="middle" fill="#C8B090" fontSize="2.2" opacity="0.8" letterSpacing="0.4">{lang==="id" ? "TEKAN RADIO" : "TAP RADIO"}</text>
+            <text x="85.5" y="55" textAnchor="middle" fill="#C8B090" fontSize="2.2" opacity="0.8" letterSpacing="0.4">{lang==="id" ? "PRESS THE RADIO FOR MUSIC" : "PRESS THE RADIO FOR MUSIC"}</text>
             <g onClick={() => { hasOpenedMusic.current = true; setShowMusicSuggest(false); setShowPlayer(p => !p); }} style={{ cursor:"pointer" }}>
               <rect x="78.5" y="74" width="14" height="2" rx="0.5" fill="#2A1808" opacity="0.9"/>
               <rect x="79.5" y="76" width="3" height="3.5" rx="0.3" fill="#221408"/>
