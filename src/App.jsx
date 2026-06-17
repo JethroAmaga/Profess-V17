@@ -2045,7 +2045,7 @@ export default function Profess() {
   {/* Spacer untuk menambah area scroll di ujung kiri */}
   <div
     style={{
-      width:"60px",
+      width:"50px",
       flexShrink:0
     }}
   />
