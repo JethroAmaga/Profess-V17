@@ -546,7 +546,7 @@ const generateChar = (roleKey, forcedGender = null) => {
   // Hairstyle pool, kept gender-appropriate
   const hairStyle = gender === "f"
     ? pick(["long","romantic_long","long_flowing","bun","bob"])
-    : pick(["short","buzz","quiff","messy"]);
+    : pick(["short","buzz","quiff","messy","soft fringe","curtain_long"]);
   const hairLong = gender === "f";
   // Outfit variant — drives small collar/pattern accents in buildSVG
   const outfitStyle = Math.floor(Math.random() * 3);
@@ -646,12 +646,38 @@ function buildSVG(charOrKey, mood, isTalking, scene = "role") {
   <ellipse cx="48" cy="96" rx="13" ry="44" fill="${h}"/>
   <ellipse cx="112" cy="96" rx="13" ry="44" fill="${h}"/>
 
-  <!-- Back hair -->
-  <ellipse cx="80" cy="132" rx="36" ry="20" fill="${h}" opacity=".85"/>
-
   <!-- Lower hair ends -->
   <ellipse cx="60" cy="158" rx="12" ry="18" fill="${h}" opacity=".9"/>
   <ellipse cx="100" cy="158" rx="12" ry="18" fill="${h}" opacity=".9"/>
+`,
+    soft_fringe: `
+  <ellipse cx="80" cy="46" rx="34" ry="18" fill="${h}"/>
+  <rect x="46" y="46" width="68" height="18" fill="${h}"/>
+
+  <path
+    d="M48 48
+       Q56 58 64 54
+       Q72 62 80 58
+       Q88 62 96 54
+       Q104 58 112 48
+       Z"
+    fill="${h}"
+  />
+`,
+    curtain_long: `
+  <ellipse cx="80" cy="45" rx="34" ry="18" fill="${h}"/>
+  <rect x="46" y="45" width="68" height="20" fill="${h}"/>
+
+  <ellipse cx="64" cy="78" rx="10" ry="26" fill="${h}"/>
+  <ellipse cx="96" cy="78" rx="10" ry="26" fill="${h}"/>
+
+  <path
+    d="M74 36
+       Q80 42 86 36
+       Q80 32 74 36 Z"
+    fill="${hairDark}"
+    opacity="0.35"
+  />
 `,
     bob: `<ellipse cx="80" cy="46" rx="34" ry="19" fill="${h}"/>
        <rect x="46" y="46" width="68" height="22" fill="${h}"/>
