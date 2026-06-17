@@ -1747,7 +1747,7 @@ export default function Profess() {
       .hero-content{padding:80px 24px 24px 24px !important;}
       .hero-tagline{font-size:clamp(36px,9vw,48px) !important;}
       .hero-begin-btn{max-width:100% !important;width:100% !important;}
-      .hero-char-row{gap:16px !important;padding:64px 16px 32px 56px !important;overflow-x:auto !important;justify-content:flex-start !important;}
+      .hero-char-row{gap:16px !important;padding:64px 16px 32px 56px !important;overflow-x:auto !important;justify-content:flex-start !important;transform:"translateX(-80px)"}
       .hero-char-svg{width:70px !important;height:88px !important;}
       .panels-row{flex-direction:column !important;}
       .panel-btn{min-height:360px !important;border-right:none !important;border-bottom:1px solid #141414 !important;padding:40px 24px !important;}
