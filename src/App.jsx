@@ -664,43 +664,28 @@ function buildSVG(charOrKey, mood, isTalking, scene = "role") {
   />
 `,
    curtain: `
-  <!-- Main top hair -->
+  <!-- Top hair -->
   <ellipse cx="80" cy="44" rx="34" ry="18" fill="${h}"/>
   <rect x="46" y="44" width="68" height="18" fill="${h}"/>
 
-<!-- Left curtain -->
-<path
-  d="
-    M68 42
-    Q54 58 56 82
-    Q58 92 68 88
-    Q66 66 70 46
-    Z
-  "
-  fill="${h}"
-/>
+  <!-- Left curtain panel -->
+  <ellipse
+    cx="62"
+    cy="66"
+    rx="10"
+    ry="22"
+    fill="${h}"
+    transform="rotate(8 62 66)"
+  />
 
-<!-- Right curtain -->
-<path
-  d="
-    M92 42
-    Q106 58 104 82
-    Q102 92 92 88
-    Q94 66 90 46
-    Z
-  "
-  fill="${h}"
-/>
-
-  <!-- Center split -->
-  <rect
-    x="77"
-    y="42"
-    width="6"
-    height="16"
-    rx="2"
-    fill="${hairDark}"
-    opacity=".25"
+  <!-- Right curtain panel -->
+  <ellipse
+    cx="98"
+    cy="66"
+    rx="10"
+    ry="22"
+    fill="${h}"
+    transform="rotate(-8 98 66)"
   />
 `,
     bob: `<ellipse cx="80" cy="46" rx="34" ry="19" fill="${h}"/>
