@@ -882,7 +882,7 @@ function buildSVG(charOrKey, mood, isTalking, scene = "role") {
          ${handL}${handR}`;
 hideLegs = true;
 
-} } else {
+} else {
 
   backProps = `
     <!-- Grass -->
