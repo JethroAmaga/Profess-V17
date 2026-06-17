@@ -859,6 +859,7 @@ function buildSVG(charOrKey, mood, isTalking, scene = "role") {
       case "date": case "romantic_interest": case "ex_partner": case "classmate":
       case "teman_ospek": case "new_acquaintance": case "neighbor": case "sibling":
       case "blind_date": case "colleague": case "stranger":
+        if (scene === "livingroom") {
         backProps = `
           <rect x="8" y="108" width="144" height="14" rx="6" fill="#241A14" stroke="#2E2018" stroke-width="1.5"/>
           <rect x="8" y="122" width="8" height="68" rx="3" fill="#1E1410"/>
@@ -878,8 +879,34 @@ function buildSVG(charOrKey, mood, isTalking, scene = "role") {
           <rect x="92" y="186" width="14" height="44" rx="5" fill="${darken(b,18)}"/>
           <ellipse cx="62" cy="222" rx="18" ry="8" fill="${darken(b,28)}"/>
           <ellipse cx="98" cy="222" rx="18" ry="8" fill="${darken(b,28)}"/>
-          ${handL}${handR}`;
-        hideLegs = true; break;
+         ${handL}${handR}`;
+hideLegs = true;
+
+} else {
+  backProps = `
+    <rect x="8" y="108" width="144" height="14" rx="6" fill="#241A14" stroke="#2E2018" stroke-width="1.5"/>
+    <rect x="8" y="122" width="8" height="68" rx="3" fill="#1E1410"/>
+    <rect x="144" y="122" width="8" height="68" rx="3" fill="#1E1410"/>`;
+  bodySVG = `
+    <rect x="42" y="130" rx="14" width="76" height="90" fill="${b}"/>
+    <path d="M58 130 Q80 141 102 130" fill="none" stroke="#C890A0" stroke-width="2.5"/>
+    ${outfitAccent(80,150,50)}
+    ${armLNoHand}${armRNoHand}`;
+  frontProps = `
+    <rect x="6" y="186" width="148" height="30" rx="8" fill="#2A1E18" stroke="#3A2820" stroke-width="1.5"/>
+    <rect x="14" y="190" width="132" height="2" rx="1" fill="#362418" opacity="0.6"/>
+    <rect x="6" y="168" width="20" height="52" rx="6" fill="#2A1E18" stroke="#3A2820" stroke-width="1"/>
+    <rect x="134" y="168" width="20" height="52" rx="6" fill="#2A1E18" stroke="#3A2820" stroke-width="1"/>
+    <rect x="9" y="172" width="14" height="18" rx="3" fill="#342818" opacity="0.7"/>
+    <rect x="137" y="172" width="14" height="18" rx="3" fill="#342818" opacity="0.7"/>
+    <rect x="54" y="186" width="14" height="44" rx="5" fill="${darken(b,18)}"/>
+    <rect x="92" y="186" width="14" height="44" rx="5" fill="${darken(b,18)}"/>
+    <ellipse cx="62" cy="222" rx="18" ry="8" fill="${darken(b,28)}"/>
+    <ellipse cx="98" cy="222" rx="18" ry="8" fill="${darken(b,28)}"/>
+    ${handL}${handR}`;
+  hideLegs = true;
+}
+break;
 
       // ── Parent / grandparent / mentor — armchair ───────────────────────
       case "parent": case "grandparent": case "mentor": case "senior":
