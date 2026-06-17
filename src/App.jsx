@@ -1794,14 +1794,14 @@ export default function Profess() {
         {/* Warm mode ambient overlay */}
         <div style={{ position:"fixed", inset:0, pointerEvents:"none", zIndex:998, background:"radial-gradient(ellipse at 65% 40%, rgba(180,100,20,0.12) 0%, rgba(140,70,10,0.06) 50%, transparent 80%)", opacity:warmMode?1:0, transition:"opacity 1.5s ease" }}/>
 
-       {/* Mobile popup: recommend desktop for best music experience — shown when radio is pressed, before YouTube embed starts */}
+     {/* Mobile popup: recommend desktop for best music experience — shown when radio is pressed, before YouTube embed starts */}
 {isMobile && showDesktopMusicHint && (
   <div
     style={{
       position:"absolute",
       left:"50%",
-      bottom:"80px",
-      transform:"translateX(-50%)",
+      top:"42%",
+      transform:"translate(-50%, -50%)",
       zIndex:1000,
       width:"260px",
       background:"#0E0E0E",
