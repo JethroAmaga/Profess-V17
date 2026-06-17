@@ -1250,7 +1250,7 @@ export default function Profess() {
       heroRow: [
         generateChar("interviewer"),
         generateChar("colleague"),
-        generateChar("friend_female"),
+        generateChar("crush"),
         generateChar("negotiator"),
       ],
     };
@@ -2318,7 +2318,7 @@ export default function Profess() {
 )}
 
   {heroRow.map((charObj, i) => {
-    const role = ["interviewer","colleague","friend_female","negotiator"][i];
+    const role = ["interviewer","colleague","crush","negotiator"][i];
     const svg = buildSVG(charObj, "neutral", false, "role");
 
     return (
