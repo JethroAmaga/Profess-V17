@@ -1938,12 +1938,52 @@ export default function Profess() {
           {/* Lamp click overlay */}
           <div className="hero-lamp-overlay" onClick={() => { setWarmMode(w => { const next = !w; setRoomMood(next ? "warm" : "neutral"); return next; }); }} title={warmMode ? "warm mode on" : "click the lamp"} style={{ position:"absolute", right:"22%", top:"51%", width:"6%", height:"16%", cursor:"pointer", zIndex:7, transform:"translateX(50%)" }}/>
           {/* Radio hint text */}
-          <div className="hero-radio-hint" onClick={() => { hasOpenedMusic.current = true; setShowMusicSuggest(false); setShowPlayer(p => !p); }} title="Toggle music player" style={{ position:"absolute", right:"8%", bottom:"30%", pointerEvents:"all", cursor:"pointer", zIndex:8, textAlign:"center", transition:"color 0.8s ease" }}>
-            <p style={{ fontFamily:"'Inter',sans-serif", fontWeight:300, fontSize:"8px", letterSpacing:".12em", textTransform:"uppercase", color:"#C8A870", opacity:showPlayer?0.9:0.75, whiteSpace:"nowrap", transition:"color 0.8s ease, opacity 0.8s ease" }}>
-              {showPlayer ? "music on" : "press radio for music"}
-            </p>
-            <span style={{ display:"block", width:"3px", height:"3px", borderRadius:"50%", background:"#C8A870", margin:"4px auto 0", animation:"pulse 1.5s ease-in-out infinite", transition:"background 0.8s ease" }}/>
-          </div>
+          <div
+  className="hero-radio-hint"
+  onClick={() => {
+    hasOpenedMusic.current = true;
+    setShowMusicSuggest(false);
+    setShowPlayer(p => !p);
+  }}
+  title="Toggle music player"
+  style={{
+    position:"absolute",
+    right:"28%",
+    top:"45%",
+    pointerEvents:"all",
+    cursor:"pointer",
+    zIndex:8,
+    textAlign:"center",
+    transition:"color 0.8s ease"
+  }}
+>
+  <p
+    style={{
+      fontFamily:"'Inter',sans-serif",
+      fontWeight:300,
+      fontSize:"8px",
+      letterSpacing:".12em",
+      textTransform:"uppercase",
+      color:"#C8A870",
+      opacity:showPlayer ? 0.9 : 0.75,
+      whiteSpace:"nowrap",
+      transition:"color 0.8s ease, opacity 0.8s ease"
+    }}
+  >
+    {showPlayer ? "music on" : "press radio for music"}
+  </p>
+
+  <span
+    style={{
+      display:"block",
+      width:"3px",
+      height:"3px",
+      borderRadius:"50%",
+      background:"#C8A870",
+      margin:"4px auto 0"
+    }}
+  />
+</div>
           {/* Radio click overlay — covers full radio body, knobs, antenna and surrounding area */}
           <div className="hero-radio-overlay" onClick={() => { hasOpenedMusic.current = true; setShowMusicSuggest(false); setShowPlayer(p => !p); }} title="Toggle music player" style={{ position:"absolute", right:"4%", top:"60%", width:"9%", height:"14%", cursor:"pointer", zIndex:8 }}/>
 
