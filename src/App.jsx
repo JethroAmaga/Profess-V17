@@ -7,7 +7,6 @@ const PROMPTS = {
 
 SESSION MODE: FORMAL | LANGUAGE: ENGLISH
 Respond entirely in English.
-
 Your approach: rigorous, precise, demanding. You embody the audience and respond exactly as they would. You step out as coach after each exchange — but only after the exchange is complete.
 
 IDENTITY TAGS — append to EVERY message (no exceptions):
@@ -638,17 +637,21 @@ function buildSVG(charOrKey, mood, isTalking, scene = "role") {
        <ellipse cx="46" cy="74" rx="9" ry="22" fill="${h}"/>
        <ellipse cx="114" cy="74" rx="9" ry="22" fill="${h}"/>
        <circle cx="80" cy="30" r="13" fill="${h}"/>`,
-    very_long: `
+   long_flowing: `
+  <!-- Top hair -->
   <ellipse cx="80" cy="46" rx="34" ry="20" fill="${h}"/>
   <rect x="46" y="46" width="68" height="22" fill="${h}"/>
 
-  <ellipse cx="46" cy="108" rx="14" ry="58" fill="${h}"/>
-  <ellipse cx="114" cy="108" rx="14" ry="58" fill="${h}"/>
+  <!-- Long side hair -->
+  <ellipse cx="48" cy="96" rx="13" ry="44" fill="${h}"/>
+  <ellipse cx="112" cy="96" rx="13" ry="44" fill="${h}"/>
 
-  <ellipse cx="80" cy="146" rx="38" ry="24" fill="${h}" opacity=".85"/>
+  <!-- Back hair -->
+  <ellipse cx="80" cy="132" rx="36" ry="20" fill="${h}" opacity=".85"/>
 
-  <ellipse cx="58" cy="182" rx="12" ry="20" fill="${h}" opacity=".9"/>
-  <ellipse cx="102" cy="182" rx="12" ry="20" fill="${h}" opacity=".9"/>
+  <!-- Lower hair ends -->
+  <ellipse cx="60" cy="158" rx="12" ry="18" fill="${h}" opacity=".9"/>
+  <ellipse cx="100" cy="158" rx="12" ry="18" fill="${h}" opacity=".9"/>
 `,
     bob: `<ellipse cx="80" cy="46" rx="34" ry="19" fill="${h}"/>
        <rect x="46" y="46" width="68" height="22" fill="${h}"/>
