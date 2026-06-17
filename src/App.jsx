@@ -1937,7 +1937,7 @@ export default function Profess() {
           </div>
           {/* Lamp click overlay */}
           <div className="hero-lamp-overlay" onClick={() => { setWarmMode(w => { const next = !w; setRoomMood(next ? "warm" : "neutral"); return next; }); }} title={warmMode ? "warm mode on" : "click the lamp"} style={{ position:"absolute", right:"22%", top:"51%", width:"6%", height:"16%", cursor:"pointer", zIndex:7, transform:"translateX(50%)" }}/>
-          {/* Radio hint text */}
+      {/* Radio hint text */}
 <div
   className="hero-radio-hint"
   onClick={() => {
@@ -1972,7 +1972,6 @@ export default function Profess() {
   >
     {showPlayer ? "music on" : "press radio for music"}
   </p>
-</div>
 
   <span
     style={{
