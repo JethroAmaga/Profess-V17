@@ -1835,20 +1835,20 @@ export default function Profess() {
               <rect x="54" y="75" width="2.5" height="4" rx="0.5" fill="#251808"/>
               <rect x="58" y="75" width="2.5" height="4" rx="0.5" fill="#251808"/>
               {/* Radio side table */}
-              <rect x="78.5" y="70" width="14" height="2" rx="0.5" fill="#2A1808" opacity="0.9"/>
-              <rect x="79.5" y="72" width="3" height="3.5" rx="0.3" fill="#221408"/>
-              <rect x="87.5" y="72" width="3" height="3.5" rx="0.3" fill="#221408"/>
+              <rect x="78.5" y="66" width="14" height="2" rx="0.5" fill="#2A1808" opacity="0.9"/>
+              <rect x="79.5" y="68" width="3" height="3.5" rx="0.3" fill="#221408"/>
+              <rect x="87.5" y="68" width="3" height="3.5" rx="0.3" fill="#221408"/>
               {/* Radio body */}
-              <rect x="84" y="62" width="13" height="8" rx="1" fill="#4A4A52" stroke="#5A5A62" strokeWidth="0.4"/>
+              <rect x="79" y="58" width="13" height="8" rx="1" fill="#4A4A52" stroke="#5A5A62" strokeWidth="0.4"/>
               {/* Radio speaker grille */}
-              <line x1="80.5" y1="63.5" x2="87" y2="63.5" stroke="#3A3A42" strokeWidth="0.45" opacity="0.9"/>
-              <line x1="80.5" y1="65" x2="87" y2="65" stroke="#3A3A42" strokeWidth="0.45" opacity="0.9"/>
-              <line x1="80.5" y1="66.5" x2="87" y2="66.5" stroke="#3A3A42" strokeWidth="0.45" opacity="0.9"/>
+              <line x1="80.5" y1="59.5" x2="87" y2="59.5" stroke="#3A3A42" strokeWidth="0.45" opacity="0.9"/>
+              <line x1="80.5" y1="61" x2="87" y2="61" stroke="#3A3A42" strokeWidth="0.45" opacity="0.9"/>
+              <line x1="80.5" y1="62.5" x2="87" y2="62.5" stroke="#3A3A42" strokeWidth="0.45" opacity="0.9"/>
               {/* Radio knobs */}
-              <circle cx="89" cy="64.2" r="1" fill="#6A6A72"/>
-              <circle cx="89" cy="67" r="1" fill="#6A6A72"/>
+              <circle cx="89" cy="60.2" r="1" fill="#6A6A72"/>
+              <circle cx="89" cy="63" r="1" fill="#6A6A72"/>
               {/* Radio antenna */}
-              <line x1="91.2" y1="62" x2="94.5" y2="56.5" stroke="#5A5A62" strokeWidth="0.6" style={showPlayer ? {animation:"antennaP 1s ease-in-out infinite"} : {opacity:0.5}}/>
+              <line x1="91.2" y1="58" x2="94.5" y2="52.5" stroke="#5A5A62" strokeWidth="0.6" style={showPlayer ? {animation:"antennaP 1s ease-in-out infinite"} : {opacity:0.5}}/>
 
               {/* Lamp glow (warmMode) */}
               {warmMode && <circle cx="50" cy="50" r="20" fill="url(#lampGlow)" opacity="0.7"/>}
