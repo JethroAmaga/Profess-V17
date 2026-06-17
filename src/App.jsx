@@ -1336,7 +1336,7 @@ export default function Profess() {
         generateChar("interviewer"),
         generateChar("colleague"),
         generateChar("crush"),
-        generateChar("negotiator"),
+        generateChar("friend_female"),
       ],
     };
   }
