@@ -2027,26 +2027,97 @@ export default function Profess() {
           </p>
         </div>
 
-        {/* Character row — between hero and panels */}
-        <div className="hero-char-row" style={{ display:"flex", justifyContent:"center", alignItems:"flex-end", gap:"48px", padding:"48px 0 32px", background:"transparent", position:"relative", zIndex:2 }}>
-          {heroRow.map((charObj, i) => {
-            const role = ["interviewer","colleague","friend_female","negotiator"][i];
-            const svg = buildSVG(charObj, "neutral", false);
-            return (
-              <div key={i} style={{ position:"relative", flexShrink:0 }}
-                onMouseEnter={() => setHoveredChar(i)}
-                onMouseLeave={() => setHoveredChar(null)}
-                onClick={() => setHoveredChar(h => h === i ? null : i)}>
-                {/* Tooltip */}
-                <div className="hero-tooltip" style={{ position:"absolute", bottom:"100%", left:"50%", transform:"translateX(-50%)", marginBottom:"8px", background:"#0E0E0E", border:"1px solid #2A2520", padding:"10px 14px", opacity: hoveredChar === i ? 1 : 0, transition:"opacity 0.2s ease", pointerEvents:"none", zIndex:100, whiteSpace:"nowrap", textAlign:"center" }}>
-                  <p style={{ fontFamily:"'Playfair Display',serif", fontSize:"13px", color: charObj.accent || "#C8A870", marginBottom:"4px" }}>{charObj.name || role}</p>
-                  <p style={{ fontSize:"11px", color:"#C8A458", fontWeight:300, marginTop:"4px" }}>{heroRoleDesc(role)}</p>
-                </div>
-                <div className="hero-char-svg" style={{ width:"90px", height:"112px", opacity:0.85, animation: heroRoleAnims[i] }} dangerouslySetInnerHTML={{ __html: svg }}/>
-              </div>
-            );
-          })}
+      {/* Character row — between hero and panels */}
+<div
+  className="hero-char-row"
+  style={{
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"flex-end",
+    gap:"48px",
+    padding:"48px 0 32px",
+    background:"transparent",
+    position:"relative",
+    zIndex:2
+  }}
+>
+  {heroRow.map((charObj, i) => {
+    const role = ["interviewer","colleague","friend_female","negotiator"][i];
+    const svg = buildSVG(charObj, "neutral", false);
+
+    return (
+      <div
+        key={i}
+        style={{ position:"relative", flexShrink:0 }}
+        onMouseEnter={() => setHoveredChar(i)}
+        onMouseLeave={() => setHoveredChar(null)}
+        onClick={() => setHoveredChar(h => h === i ? null : i)}
+      >
+        {/* Tooltip */}
+        <div
+          className="hero-tooltip"
+          style={{
+            position:"absolute",
+            bottom:"100%",
+            left:"50%",
+            transform:"translateX(-50%)",
+            marginBottom:"8px",
+            background:"#0E0E0E",
+            border:"1px solid #2A2520",
+            padding:"10px 14px",
+            opacity: hoveredChar === i ? 1 : 0,
+            transition:"opacity 0.2s ease",
+            pointerEvents:"none",
+            zIndex:100,
+            whiteSpace:"nowrap",
+            textAlign:"center"
+          }}
+        >
+          <p
+            style={{
+              fontFamily:"'Playfair Display',serif",
+              fontSize:"13px",
+              color: charObj.accent || "#C8A870",
+              marginBottom:"4px"
+            }}
+          >
+            {charObj.name || role}
+          </p>
+
+          <p
+            style={{
+              fontSize:"11px",
+              color:"#C8A458",
+              fontWeight:300,
+              marginTop:"4px"
+            }}
+          >
+            {heroRoleDesc(role)}
+          </p>
         </div>
+
+        <div
+          className="hero-char-svg"
+          style={{
+            width:"90px",
+            height:"112px",
+            opacity:0.85,
+            animation: heroRoleAnims[i]
+          }}
+          dangerouslySetInnerHTML={{ __html: svg }}
+        />
+      </div>
+    );
+  })}
+
+  {/* Spacer untuk menambah area scroll di ujung kanan */}
+  <div
+    style={{
+      width:"80px",
+      flexShrink:0
+    }}
+  />
+</div>
 
         {/* ── THREE-PANEL SECTION ── */}
         <div style={{ position:"relative", background:"#060606", backgroundImage:"radial-gradient(circle, #1C1C1C 1px, transparent 1px)", backgroundSize:"24px 24px", borderTop:"1px solid #141414" }}>
