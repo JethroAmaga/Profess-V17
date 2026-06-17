@@ -882,22 +882,13 @@ function buildSVG(charOrKey, mood, isTalking, scene = "role") {
          ${handL}${handR}`;
 hideLegs = true;
 
-        } else if (
+        }else if (
   roleKey === "crush" ||
   roleKey === "date" ||
   roleKey === "romantic_interest"
 ) {
 
   backProps = `
-    <!-- Floor -->
-    <rect
-      x="0"
-      y="185"
-      width="160"
-      height="55"
-      fill="#35261F"
-    />
-
     <!-- Hanging lamp wire -->
     <line
       x1="120"
@@ -908,7 +899,7 @@ hideLegs = true;
       stroke-width="2"
     />
 
-    <!-- Warm hanging lamp -->
+    <!-- Warm lamp -->
     <circle
       cx="120"
       cy="40"
@@ -950,28 +941,39 @@ hideLegs = true;
   `;
 
   frontProps = `
-    <!-- Round cafe table -->
+    <!-- Large round cafe table -->
+
     <ellipse
       cx="80"
-      cy="182"
-      rx="42"
-      ry="8"
+      cy="186"
+      rx="58"
+      ry="12"
       fill="#4A3124"
     />
 
+    <ellipse
+      cx="80"
+      cy="190"
+      rx="58"
+      ry="12"
+      fill="#3A2418"
+    />
+
     <!-- Table leg -->
+
     <rect
-      x="76"
-      y="182"
-      width="8"
-      height="24"
+      x="77"
+      y="190"
+      width="6"
+      height="12"
       fill="#3A2418"
     />
 
     <!-- Coffee cup -->
+
     <rect
-      x="102"
-      y="172"
+      x="116"
+      y="174"
       width="8"
       height="6"
       rx="1"
