@@ -663,7 +663,7 @@ function buildSVG(charOrKey, mood, isTalking, scene = "role") {
     fill="${h}"
   />
 `,
-   curtain: `
+  curtain: `
   <!-- Top hair -->
   <ellipse cx="80" cy="44" rx="34" ry="18" fill="${h}"/>
   <rect x="46" y="44" width="68" height="18" fill="${h}"/>
