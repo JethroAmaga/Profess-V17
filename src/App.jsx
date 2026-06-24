@@ -585,8 +585,8 @@ const getScene = (mode, groupIdx) => {
 // top of the page, scrubbed by scroll position rather than autoplaying on a
 // timer. See the IntroVideo component below.
 // Google Cloud public test video — known to work for cross-origin embed.
-const VIDEO_SRC = "/video/mountain-loop.mp4";
-const VIDEO_SRC_MOBILE = "/video/mountain-loop-mobile.mp4";
+const VIDEO_SRC = "/video/videoscroll.mp4";
+const VIDEO_SRC_MOBILE = "/video/videoscroll.mp4";
 const VIDEO_FALLBACK = "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4";
 
 const css = `
@@ -1854,7 +1854,7 @@ export default function Profess() {
               animate={stage === "intro" ? { clipPath: "inset(0 0 0 0%)" } : false}
               transition={stage === "intro" ? { duration: 1.3, ease: [0.16, 1, 0.3, 1] } : undefined}>
               <motion.img
-                src={stage === "intro" ? "/video/backdrop-last-frame.jpg" : backdropFor(scene)}
+                src={stage === "intro" ? "/video/backdrop-last-frame.png" : backdropFor(scene)}
                 alt="" loading="eager" decoding="async"
                 initial={stage === "intro" ? { opacity: 0, scale: 1.22, filter: "blur(14px)" } : { opacity: 0, scale: 1.05 }}
                 animate={stage === "intro"
